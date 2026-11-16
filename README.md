@@ -33,12 +33,3 @@ nome-do-projeto/
 └── docs/
     ├── index.html
     └── assets/
-```[cite: 2, 3]
-
-## Como Reproduzir o Projeto
-1. Clone este repositório e acesse a pasta raiz.
-2. Crie e ative o ambiente virtual:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Linux/macOS
-   .venv\Scripts\activate     # Windows
