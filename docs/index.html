@@ -1,253 +1,1039 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise Empírica da Educação Superior Brasileira via Microdados do INEP</title>
-    <!-- Plotly.js CDN para Gráficos Interativos -->
+    <title>
+        Comparação entre Instituições Públicas e Privadas no Ensino Superior Brasileiro (2020–2023)
+    </title>
+
+    <!-- Biblioteca Plotly.js para gráficos interativos -->
     <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
-    <!-- Highlight.js para exibição de código limpo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
+
 <body>
 
-<article class="article-container">
+    <main class="container">
 
-    <!-- 1. CABEÇALHO -->
-    <header class="article-header">
-        <div class="course-tag">Linguagem de Programação — Análise e Visualização de Dados com Python</div>
-        <h1 class="article-title">Expansão, Desempenho e Modalidades de Oferta no Ensino Superior Brasileiro: Uma Análise Empírica dos Microdados do Censo (INEP)</h1>
-        
-        <div class="authors-block">
-            <strong>Alunos:</strong> Anna Clara Berce e João Pedro Torres &nbsp;|&nbsp; <strong>Professor Orientador:</strong> Alexandre Neves Louzada
-        </div>
-        <div class="affiliation-block">
-            Curso de Bacharelado em Sistemas de Informação — Projeto Final de Ciência de Dados
-        </div>
+        <!-- 1. CABEÇALHO -->
+        <header>
+            <h1>
+                Comparação entre Instituições de Ensino Superior Públicas e Privadas no Brasil:
+                Evolução da Oferta de Vagas, Ingressos e Conclusões (2020–2023)
+            </h1>
 
-        <div class="badges-row">
-            <span class="badge blue">Python 3.11+</span>
-            <span class="badge blue">Pandas &amp; SciPy</span>
-            <span class="badge green">Plotly Interactive</span>
-            <span class="badge purple">Dados Abertos INEP</span>
-            <span class="badge">FAIR Compliant</span>
-        </div>
+            <div class="autoria">
+                <p style="text-align: center;">
+                    <strong>[Nome Completo do(a) Discente Autor(a) 1]</strong><br>
+                    <strong>[Nome Completo do(a) Discente Autor(a) 2]</strong><br><br>
 
-        <a href="https://github.com/SEU-USUARIO/SEU-REPOSITORIO" target="_blank" rel="noopener noreferrer" class="github-btn">
-            <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg>
-            Acessar Repositório Fonte no GitHub
-        </a>
-    </header>
+                    Centro Universitário La Salle do Rio de Janeiro — Unilasalle-RJ<br>
+                    Bacharelado em Sistemas de Informação<br>
+                    Disciplina: Linguagens de Programação<br>
+                    Docente: Alexandre Neves Louzada
+                </p>
 
-    <!-- 2. RESUMO / ABSTRACT -->
-    <section class="abstract-box">
-        <h2>Resumo</h2>
-        <p>
-            A expansão do ensino superior brasileiro nas últimas décadas foi marcada por intensas transformações estruturais, impulsionadas pelo crescimento da rede privada e pela consolidação da Educação a Distância (EaD). Este estudo investiga a dinâmica de oferta de vagas, ingresso, conclusão e distribuição regional das modalidades de ensino a partir dos microdados oficiais do Censo da Educação Superior disponibilizados pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP). Para tal, desenvolveu-se um pipeline reprodutível em Python utilizando as bibliotecas <code>pandas</code>, <code>numpy</code>, <code>scipy</code> e <code>plotly</code>, abrangendo etapas de limpeza, tratamento de valores ausentes, engenharia de métricas e testes de hipóteses não paramétricos (Mann-Whitney U). Os resultados empíricos evidenciam uma assimetria acentuada: enquanto a rede privada concentra a maioria absoluta da expansão de vagas — fortemente alavancada pela modalidade a distância em todas as macrorregiões —, a rede pública mantém predominância no ensino presencial e apresenta distribuições estatisticamente distintas nas taxas de conclusão de curso. Tais achados reforçam a necessidade de políticas públicas focalizadas não apenas na democratização do acesso, mas na permanência estudantil e na qualidade regulatória da oferta EaD.
-        </p>
-        <div class="keywords">
-            <strong>Palavras-chave:</strong> Censo da Educação Superior; Microdados INEP; Educação a Distância; Análise de Dados; Ciência Aberta.
-        </div>
-    </section>
+                <!-- Badges de Metadados -->
+                <div class="badges" aria-label="Metadados do projeto">
+                    <span class="badge">
+                        <span class="badge-label">Dados</span>
+                        <span class="badge-value">Inep / MEC (2020–2023)</span>
+                    </span>
+                    <span class="badge">
+                        <span class="badge-label">Registros</span>
+                        <span class="badge-value green">2.034.049 Cursos</span>
+                    </span>
+                    <span class="badge">
+                        <span class="badge-label">Stack</span>
+                        <span class="badge-value amber">Python · Pandas · SciPy · Plotly</span>
+                    </span>
+                    <span class="badge">
+                        <span class="badge-label">Armazenamento</span>
+                        <span class="badge-value slate">Apache Parquet (FAIR)</span>
+                    </span>
+                </div>
 
-    <!-- 3. INTRODUÇÃO -->
-    <section id="introducao">
-        <h2>1. Introdução</h2>
-        <p>
-            O acompanhamento sistemático do ensino superior constitui um pilar estratégico para o planejamento de políticas educacionais, alocação de recursos públicos e avaliação da democratização do acesso ao conhecimento científico e tecnológico no Brasil. Anualmente, o Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) publica os microdados do Censo da Educação Superior, fornecendo um retrato censitário detalhado das Instituições de Educação Superior (IES), seus cursos de graduação, corpo docente e discente.
-        </p>
-        <p>
-            Do ponto de vista social e econômico, compreender como as vagas são ofertadas e preenchidas entre as redes pública e privada — bem como o impacto da capilarização do ensino a distância nas diferentes macrorregiões do país — permite diagnosticar gargalos de eficiência acadêmica e desigualdades regionais. Diante desse cenário, este trabalho estabelece três Perguntas de Pesquisa (<em>Research Questions</em>) centrais:
-        </p>
-        <ul class="rq-list">
-            <li><strong>RQ1:</strong> Qual é a diferença proporcional na evolução do número de vagas ofertadas e de ingressantes entre as instituições de ensino superior públicas e privadas nos últimos anos disponíveis do Censo?</li>
-            <li><strong>RQ2:</strong> Existe correlação estatística significativa entre a categoria administrativa da instituição (Pública vs. Privada) e a taxa de conclusão de cursos de graduação?</li>
-            <li><strong>RQ3:</strong> Como se distribui a oferta de vagas nas modalidades presencial e a distância quando comparadas entre as redes pública e privada em âmbito regional?</li>
-        </ul>
-    </section>
-
-    <!-- 4. METODOLOGIA E PIPELINE DE DADOS -->
-    <section id="metodologia">
-        <h2>2. Metodologia e Pipeline de Dados</h2>
-        <p>
-            A base empírica deste estudo compreende os arquivos de microdados do Censo da Educação Superior (tabelas de <em>Cadastro de Cursos</em>), obtidos diretamente do portal de dados abertos do INEP. A granularidade observada corresponde ao nível de <strong>curso de graduação por instituição e município de oferta</strong> em cada edição anual do Censo.
-        </p>
-
-        <h3>2.1 Estratégias de Tratamento e Engenharia de Métricas</h3>
-        <p>
-            Devido ao elevado volume e à estrutura legada dos arquivos CSV do INEP (delimitados por ponto e vírgula e codificados em <code>latin1</code>), o pipeline de pré-processamento aplicou as seguintes etapas rigorosas:
-        </p>
-        <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
-            <li><strong>Padronização de Tipos e Codificação:</strong> Leitura explícita com <code>encoding='latin1'</code> e conversão de identificadores categóricos (<code>NU_ANO_CENSO</code>, <code>TP_CAT_ADMIN</code>, <code>TP_MODALIDADE_ENSINO</code> e <code>CO_REGIAO</code>).</li>
-            <li><strong>Mapeamento Semântico:</strong> Agrupamento dos códigos originais de categoria administrativa em duas macrocategorias analíticas (<code>Pública</code>: Federal, Estadual e Municipal; <code>Privada</code>: Com fins lucrativos e Sem fins lucrativos).</li>
-            <li><strong>Tratamento de Valores Ausentes e Anomalias:</strong> Substituição de registros nulos em variáveis quantitativas de vagas e ingressantes por zero apenas após validação estrutural, e filtragem de cursos com matrículas ativas (<code>QT_MAT &gt; 0</code>) e taxa de conclusão limitada ao intervalo válido de 0% a 100% para evitar distorções de cursos em processo de extinção.</li>
-            <li><strong>Métrica Derivada (Taxa de Conclusão):</strong> Definida pela razão percentual entre o total de concluintes no ano de referência e o total de matrículas vinculadas ao curso: <code>TAXA_CONCLUSAO = (QT_CONC / QT_MAT) * 100</code>.</li>
-        </ol>
-
-        <h3>2.2 Implementação Computacional do Pipeline</h3>
-        <pre><code class="language-python">import pandas as pd
-import numpy as np
-import scipy.stats as stats
-
-# 1. Carregamento otimizado dos microdados do INEP
-df_cursos = pd.read_csv(
-    'MICRODADOS_CADASTRO_CURSOS.CSV',
-    sep=';',
-    encoding='latin1',
-    low_memory=False
-)
-
-# 2. Mapeamento de Categoria Administrativa e Modalidade
-cat_admin_map = {1: 'Pública', 2: 'Pública', 3: 'Pública', 4: 'Privada', 5: 'Privada', 6: 'Privada'}
-modalidade_map = {1: 'Presencial', 2: 'A Distância (EaD)'}
-
-df_cursos['REDE_DESCRICAO'] = df_cursos['TP_CATEGORIA_ADMINISTRATIVA'].map(cat_admin_map)
-df_cursos['MODALIDADE'] = df_cursos['TP_MODALIDADE_ENSINO'].map(modalidade_map)
-
-# 3. Engenharia de Métrica Derivada e Filtragem para RQ2
-df_validos = df_cursos[(df_cursos['QT_MAT'] > 0) & (df_cursos['REDE_DESCRICAO'].notna())].copy()
-df_validos['TAXA_CONCLUSAO'] = (df_validos['QT_CONC'] / df_validos['QT_MAT']) * 100
-df_validos = df_validos[df_validos['TAXA_CONCLUSAO'] <= 100]
-
-# 4. Teste de Hipótese Não Paramétrico (Mann-Whitney U)
-pub = df_validos[df_validos['REDE_DESCRICAO'] == 'Pública']['TAXA_CONCLUSAO']
-priv = df_validos[df_validos['REDE_DESCRICAO'] == 'Privada']['TAXA_CONCLUSAO']
-stat, p_value = stats.mannwhitneyu(pub, priv, alternative='two-sided')</code></pre>
-    </section>
-
-    <!-- 5. RESULTADOS E DISCUSSÃO -->
-    <section id="resultados">
-        <h2>3. Resultados e Discussão</h2>
-
-        <h3>3.1 Evolução de Vagas Ofertadas e Ingressantes (RQ1)</h3>
-        <p>
-            A análise longitudinal demonstra um descolamento expressivo entre as curvas de oferta de vagas e de efetivação de ingressos. Na rede privada, observa-se um crescimento acelerado na disponibilização de vagas ao longo da série histórica, enquanto o número de ingressantes cresce em ritmo substancialmente menor — gerando uma taxa de ociosidade estrutural. Em contrapartida, a rede pública apresenta estabilidade na oferta anual de vagas e alta taxa de ocupação por ingressantes, refletindo a restrição orçamentária das universidades federais e estaduais aliada à elevada demanda por ensino gratuito.
-        </p>
-        <div class="figure-container">
-            <div id="chart-rq1" class="plotly-chart"></div>
-            <div class="figure-caption">Figura 1: Comparativo evolutivo da oferta de vagas e ingressantes por categoria administrativa (Substitua os dados de exemplo pelos valores agregados do seu DataFrame).</div>
-        </div>
-
-        <h3>3.2 Categoria Administrativa e Taxa de Conclusão (RQ2)</h3>
-        <p>
-            A aplicação do teste não paramétrico de <strong>Mann-Whitney U</strong> rejeitou a hipótese nula de igualdade entre as distribuições (<em>p-valor &lt; 0,001</em>), confirmando que existe diferença estatisticamente significativa nas taxas de conclusão entre cursos públicos e privados. A análise dos quartis revela que, embora a rede privada apresente maior dispersão entre cursos de ciclo curto (tecnólogos) e bacharelados, a rede pública exibe comportamento fortemente influenciado pela duração média superior dos cursos presenciais e pelos índices de retenção nos ciclos básicos.
-        </p>
-        <div class="figure-container">
-            <div id="chart-rq2" class="plotly-chart"></div>
-            <div class="figure-caption">Figura 2: Distribuição estatística (Boxplot) da Taxa de Conclusão (%) segundo a categoria administrativa.</div>
-        </div>
-
-        <h3>3.3 Distribuição Regional por Modalidade de Ensino (RQ3)</h3>
-        <p>
-            Ao desagregar a oferta de vagas pelas cinco macrorregiões brasileiras (Norte, Nordeste, Centro-Oeste, Sudeste e Sul), constata-se que a modalidade <strong>A Distância (EaD)</strong> tornou-se o principal vetor de capilarização da rede privada, superando numericamente a oferta presencial em todas as regiões, inclusive nas regiões Norte e Nordeste, historicamente sub-representadas em infraestrutura física universitária. Por outro lado, a rede pública mantém seu modelo operacional majoritariamente ancorado no ensino presencial, com participação residual da modalidade EaD vinculada majoritariamente aos polos da Universidade Aberta do Brasil (UAB).
-        </p>
-        <div class="figure-container">
-            <div id="chart-rq3" class="plotly-chart"></div>
-            <div class="figure-caption">Figura 3: Distribuição regional da oferta de vagas entre modalidades Presencial e EaD por rede de ensino.</div>
-        </div>
-    </section>
-
-    <!-- 6. CONCLUSÃO -->
-    <section id="conclusao">
-        <h2>4. Conclusão</h2>
-        <p>
-            Este trabalho apresentou uma investigação reprodutível sobre a estrutura do ensino superior brasileiro com base nos microdados do Censo (INEP). Os resultados confirmam que a democratização quantitativa do acesso na última década foi liderada pela rede privada via modalidade EaD (RQ1 e RQ3), ao passo que as dinâmicas de conclusão permanecem estatisticamente distintas entre os setores público e privado (RQ2).
-        </p>
-        <p>
-            <strong>Limitações e Trabalhos Futuros:</strong> Como limitação metodológica, o cálculo transversal da taxa de conclusão (razão entre concluintes e matrículas no mesmo ano) não acompanha coortes individuais de estudantes ao longo do tempo (trajetória longitudinal por CPF anonimizado). Como trabalhos futuros, recomenda-se a análise de coortes longitudinais para mensuração exata da evasão acumulada, bem como o cruzamento com os indicadores de qualidade do ENADE para avaliar a relação entre expansão EaD e desempenho acadêmico.
-        </p>
-    </section>
-
-    <!-- 7. DISPONIBILIDADE DOS DADOS E DECLARAÇÃO FAIR -->
-    <section id="fair">
-        <h2>5. Disponibilidade dos Dados e Declaração FAIR</h2>
-        <div class="fair-box">
-            <p>
-                Em conformidade com os princípios <strong>FAIR</strong> (<em>Findable, Accessible, Interoperable, Reusable</em>), todo o código-fonte, notebooks analíticos e scripts de visualização deste estudo estão versionados e publicamente acessíveis sob licença aberta no GitHub. Os dados brutos são de domínio público e mantidos pelo INEP.
-            </p>
-            <p><strong>Reprodução Integral do Pipeline via Terminal:</strong></p>
-            <div class="terminal-box">
-# 1. Clonar o repositório do projeto<br>
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git<br>
-cd SEU-REPOSITORIO<br><br>
-# 2. Criar ambiente virtual e instalar dependências<br>
-python -m venv venv<br>
-source venv/bin/activate  # No Windows: venv\Scripts\activate<br>
-pip install -r requirements.txt<br><br>
-# 3. Executar o notebook / pipeline de análise<br>
-jupyter nbconvert --to notebook --execute analise_censo_inep.ipynb
+                <!-- Botão de atalho para o repositório fonte no GitHub -->
+                <a
+                    href="https://github.com/usuario/censo-superior-publica-privada"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="github-button">
+                    Ver repositório no GitHub
+                </a>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- 8. REFERÊNCIAS -->
-    <section id="referencias">
-        <h2>6. Referências</h2>
-        <ol class="references-list">
-            <li>BRASIL. Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP). <strong>Microdados do Censo da Educação Superior: Notas Estatísticas e Dicionário de Variáveis</strong>. Brasília, DF: INEP/MEC, 2024. Disponível em: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior. Acesso em: nov. 2026.</li>
-            <li>MCKINNEY, Wes. Data Structures for Statistical Computing in Python. In: <strong>Proceedings of the 9th Python in Science Conference (SciPy)</strong>, Austin, TX, p. 56–61, 2010.</li>
-            <li>PLOTLY TECHNOLOGIES INC. <strong>Collaborative Data Science &amp; Plotly Express Documentation</strong>. Montreal, QC: Plotly, 2024. Disponível em: https://plotly.com/python/. Acesso em: nov. 2026.</li>
-            <li>VIRTANEN, Pauli et al. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. <strong>Nature Methods</strong>, v. 17, p. 261–272, 2020.</li>
-            <li>WILKINSON, Mark D. et al. The FAIR Guiding Principles for scientific data management and stewardship. <strong>Scientific Data</strong>, v. 3, n. 160018, 2016.</li>
-        </ol>
-    </section>
+        <!-- 2. RESUMO -->
+        <section>
+            <h2>Resumo</h2>
 
-    <footer>
-        Desenvolvido por <strong>Anna Clara Berce</strong> | Disciplina: <em>Linguagem de Programação — Análise e Visualização de Dados com Python</em> | Prof. Alexandre Neves Louzada
-    </footer>
+            <div class="resumo">
+                <p>
+                    Este estudo analisa comparativamente a evolução da oferta de vagas, dos ingressos e das conclusões nas instituições de ensino superior (IES) públicas e privadas do Brasil entre 2020 e 2023, utilizando os microdados oficiais do Censo da Educação Superior disponibilizados pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep/MEC). Para garantir reprodutibilidade e eficiência computacional, desenvolveu-se um pipeline de extração, transformação e carregamento (ETL) em Python que consolidou 2.034.049 registros de cursos de graduação em formato Apache Parquet, contemplando harmonização de esquema, tipagem numérica explícita, decodificação de categorias administrativas e tratamento transparente de ofertas a distância sem vinculação municipal. Foram aplicadas técnicas de estatística descritiva, análise temporal com índice base 100, taxa de crescimento anual composta (CAGR), indicadores de ocupação e testes não paramétricos de inferência estatística. Os resultados revelam que a rede privada concentrou 96,18% das vagas ofertadas e 88,60% dos ingressantes em 2023, registrando crescimento acumulado de 26,21% nas vagas e 36,64% nos ingressos, contra 8,85% e 7,99% na rede pública, respectivamente. Ademais, observam-se assimetrias expressivas na taxa de ocupação (18,68% na privada frente a 60,55% na pública em 2023) e na dinâmica de concluintes. O estudo evidencia a consolidação da expansão privada impulsionada pela educação a distância e fornece subsídios empíricos para políticas públicas de acesso, permanência e regulação da qualidade acadêmica.
+                </p>
 
-</article>
+                <p class="palavras-chave">
+                    <strong>Palavras-chave:</strong>
+                    ensino superior; instituições públicas e privadas; Censo da Educação Superior;
+                    análise de dados; educação a distância; Python.
+                </p>
+            </div>
+        </section>
 
-<!-- SCRIPTS INTERATIVOS PLOTLY (EXEMPLOS EMBUTIDOS PARA RENDERIZAÇÃO IMEDIATA) -->
-<script>
-    hljs.highlightAll();
+        <!-- 3. INTRODUÇÃO -->
+        <section>
+            <h2>1. Introdução</h2>
 
-    // Gráfico RQ1 - Evolução Vagas vs Ingressantes
-    const anos = ['2019', '2020', '2021', '2022', '2023'];
-    Plotly.newPlot('chart-rq1', [
-        { x: anos, y: [15.5, 18.8, 21.9, 23.8, 24.5], name: 'Vagas - Privada (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#ff7f0e', width: 3 } },
-        { x: anos, y: [2.8, 3.1, 3.3, 3.6, 3.8], name: 'Ingressantes - Privada (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#ffbb78', width: 3, dash: 'dash' } },
-        { x: anos, y: [0.84, 0.82, 0.85, 0.86, 0.88], name: 'Vagas - Pública (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#1f77b4', width: 3 } },
-        { x: anos, y: [0.56, 0.50, 0.54, 0.56, 0.58], name: 'Ingressantes - Pública (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#aec7e8', width: 3, dash: 'dash' } }
-    ], {
-        title: 'Evolução de Vagas Ofertadas e Ingressantes (Pública vs. Privada)',
-        xaxis: { title: 'Ano do Censo' },
-        yaxis: { title: 'Quantidade (em Milhões)' },
-        template: 'plotly_white',
-        legend: { orientation: 'h', y: -0.2 }
-    }, { responsive: true });
+            <p>
+                A educação superior desempenha papel estratégico no desenvolvimento socioeconômico,
+                na inovação científica e na mobilidade social do Brasil. Nas últimas décadas, o sistema
+                universitário brasileiro passou por intensas transformações estruturais, caracterizadas
+                pela expansão acelerada da iniciativa privada, pela interiorização das instituições e
+                pela capilarização da educação a distância (EaD). Compreender como a oferta de vagas,
+                o ingresso de estudantes e a conclusão de cursos evoluíram entre as redes pública e
+                privada é fundamental para avaliar a democratização do acesso e a eficiência formativa
+                do ensino terciário no país.
+            </p>
 
-    // Gráfico RQ2 - Boxplot Taxa de Conclusão
-    Plotly.newPlot('chart-rq2', [
-        { y: [6, 9, 12, 14, 17, 21, 25, 30], type: 'box', name: 'Pública', marker: { color: '#1f77b4' }, boxmean: true },
-        { y: [8, 13, 18, 22, 27, 34, 42, 50], type: 'box', name: 'Privada', marker: { color: '#ff7f0e' }, boxmean: true }
-    ], {
-        title: 'Distribuição da Taxa de Conclusão (%) por Categoria Administrativa',
-        yaxis: { title: 'Taxa de Conclusão (%)' },
-        template: 'plotly_white',
-        showlegend: false
-    }, { responsive: true });
+            <p>
+                O recorte temporal de 2020 a 2023 reveste-se de especial relevância analítica por
+                compreender o impacto imediato da pandemia de COVID-19 sobre o funcionamento das
+                instituições de ensino superior (IES) e os subsequentes movimentos de reconfiguração
+                da demanda estudantil. Enquanto as universidades públicas enfrentaram restrições
+                orçamentárias e adaptações acadêmicas ao ensino remoto emergencial, grandes grupos
+                educacionais privados ampliaram expressivamente a oferta de vagas em polos EaD,
+                alterando a composição proporcional do sistema nacional de graduação.
+            </p>
 
-    // Gráfico RQ3 - Distribuição Regional Presencial vs EaD
-    const regioes = ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'];
-    Plotly.newPlot('chart-rq3', [
-        { x: regioes, y: [0.45, 1.15, 0.65, 2.80, 0.95], name: 'Privada - Presencial', type: 'bar', marker: { color: '#ffbb78' } },
-        { x: regioes, y: [1.55, 3.80, 1.85, 7.60, 3.40], name: 'Privada - EaD', type: 'bar', marker: { color: '#ff7f0e' } },
-        { x: regioes, y: [0.11, 0.25, 0.10, 0.28, 0.14], name: 'Pública - Presencial', type: 'bar', marker: { color: '#1f77b4' } },
-        { x: regioes, y: [0.02, 0.04, 0.01, 0.05, 0.02], name: 'Pública - EaD', type: 'bar', marker: { color: '#aec7e8' } }
-    ], {
-        title: 'Oferta de Vagas por Região, Rede e Modalidade (em Milhões)',
-        barmode: 'group',
-        xaxis: { title: 'Macrorregião Geográfica' },
-        yaxis: { title: 'Vagas Ofertadas (Milhões)' },
-        template: 'plotly_white',
-        legend: { orientation: 'h', y: -0.2 }
-    }, { responsive: true });
-</script>
+            <p>
+                Diante desse cenário, este trabalho investiga os microdados oficiais do Censo da
+                Educação Superior (Inep/MEC) entre 2020 e 2023 a partir de três perguntas de pesquisa
+                explícitas:
+            </p>
+
+            <div class="rq">
+                <strong>RQ1 —</strong>
+                Qual é a diferença proporcional na evolução do número de vagas ofertadas e de
+                ingressantes entre as instituições de ensino superior públicas e privadas nos últimos
+                anos disponíveis do Censo (2020–2023)?
+            </div>
+
+            <div class="rq">
+                <strong>RQ2 —</strong>
+                Existe correlação estatística significativa entre a categoria administrativa da
+                instituição (Pública vs. Privada e suas subdivisões) e a taxa de conclusão de
+                cursos de graduação?
+            </div>
+
+            <div class="rq">
+                <strong>RQ3 —</strong>
+                Como se distribui a oferta de vagas nas modalidades presencial e a distância quando
+                comparadas entre as redes pública e privada em âmbito regional?
+            </div>
+        </section>
+
+        <!-- 4. METODOLOGIA E PIPELINE DE DADOS -->
+        <section>
+            <h2>2. Metodologia e Pipeline de Dados</h2>
+
+            <h3>2.1 Fonte primária e granularidade dos dados</h3>
+
+            <p>
+                A fonte primária deste estudo corresponde aos microdados anuais do <strong>Censo da
+                Educação Superior</strong>, produzidos e divulgados pelo Instituto Nacional de Estudos
+                e Pesquisas Educacionais Anísio Teixeira (Inep), autarquia vinculada ao Ministério da
+                Educação (MEC), abrangendo as edições de <strong>2020 a 2023</strong>.
+            </p>
+
+            <p>
+                A granularidade observada na tabela de cursos/ofertas reflete cada registro de oferta
+                de curso por instituição de ensino superior (<code>CO_IES</code>), código do curso
+                (<code>CO_CURSO</code>), município/local de oferta e dimensão censitária
+                (<code>TP_DIMENSAO</code>) em cada ano de referência (<code>NU_ANO_CENSO</code>).
+                Após a filtragem restrita aos cursos de graduação, a base consolidada totalizou
+                <strong>2.034.049 observações</strong> distribuídas ao longo dos quatro anos:
+                344.665 registros em 2020; 444.769 em 2021; 573.010 em 2022; e 671.605 em 2023.
+            </p>
+
+            <h3>2.2 Arquitetura do pipeline e otimização de esquema</h3>
+
+            <p>
+                Os arquivos brutos de microdados apresentam elevado volume em memória (~19 GB acumulados
+                nas quatro edições) e pequenas divergências de esquema entre anos distintos (como a
+                presença de <code>CO_CINE_ROTULO2</code> apenas em 2020 e das variáveis
+                <code>IN_COMUNITARIA</code> e <code>IN_CONFESSIONAL</code> a partir de 2023). Para
+                assegurar reprodutibilidade, baixo consumo de memória (&lt; 160 MB em execução) e
+                integridade estrutural, foi implementado um pipeline modular de extração, transformação
+                e carregamento (ETL) em Python utilizando <code>Pandas</code>, <code>NumPy</code> e
+                <code>PyArrow</code>.
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Seleção de colunas comuns:</strong> leitura seletiva das 23 variáveis
+                    analíticas compartilhadas entre 2020 e 2023 via leitura colunar em Parquet.
+                </li>
+                <li>
+                    <strong>Filtragem de nível acadêmico:</strong> manutenção exclusiva dos cursos
+                    de graduação (<code>TP_NIVEL_ACADEMICO == '1'</code>), descartando cursos
+                    sequenciais de formação específica (<code>TP_NIVEL_ACADEMICO == '2'</code>).
+                </li>
+                <li>
+                    <strong>Conversão de tipos primitivos:</strong> variáveis quantitativas armazenadas
+                    originalmente como texto foram convertidas para inteiros de 64 bits
+                    (<code>int64</code>), <code>NU_ANO_CENSO</code> foi tipado como <code>int32</code>
+                    e 17 atributos descritivos foram otimizados como tipos categóricos (<code>category</code>).
+                </li>
+                <li>
+                    <strong>Tratamento de valores ausentes:</strong> registros sem preenchimento em
+                    <code>NO_REGIAO</code> ou <code>IN_CAPITAL</code> (aproximadamente 1,7% a 1,8% das
+                    linhas) correspondem a ofertas EaD sem vinculação municipal ou de polos no exterior
+                    (<code>TP_DIMENSAO</code> 3 e 4). Em vez de descartá-los — o que subestimaria os
+                    totais nacionais —, foram imputados com o rótulo explícito
+                    <code>"Não informada / Exterior (EaD)"</code>, preservando a integridade da RQ1 e RQ2
+                    e permitindo seu isolamento transparente na análise regional da RQ3.
+                </li>
+            </ul>
+
+            <h3>2.3 Variáveis derivadas e indicadores analíticos</h3>
+
+            <p>
+                A partir dos códigos numéricos do dicionário oficial do Inep, foram criadas seis colunas
+                categóricas legíveis (<code>REDE</code>, <code>CATEGORIA_ADM</code>,
+                <code>MODALIDADE</code>, <code>GRAU_ACADEMICO</code>, <code>LOCALIDADE</code> e
+                <code>REGIAO</code>), elevando o esquema final para <strong>29 colunas</strong>,
+                persistidas em disco no arquivo único
+                <code>data/processed/censo_superior_2020_2023_graduacao.parquet</code> (14,18 MB).
+                Sobre essa base, calcularam-se as seguintes métricas derivadas:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Participação Proporcional (<em>Market Share</em>):</strong> fatia percentual
+                    de vagas totais (<code>SHARE_VAGAS_PCT</code>) e ingressantes
+                    (<code>SHARE_ING_PCT</code>) de cada rede sobre o total nacional anual.
+                </li>
+                <li>
+                    <strong>Índice Base 100 (<code>2020 = 100</code>) e CAGR:</strong> evolução relativa
+                    normalizada ao ano inicial e Taxa de Crescimento Anual Composta
+                    (<code>CAGR = (V<sub>2023</sub> / V<sub>2020</sub>)<sup>1/3</sup> &minus; 1</code>).
+                </li>
+                <li>
+                    <strong>Indicadores de Demanda e Ocupação:</strong> Taxa de Ocupação
+                    (<code>QT_ING / QT_VG_TOTAL</code>), Relação Candidato/Vaga
+                    (<code>QT_INSCRITO_TOTAL / QT_VG_TOTAL</code>) e Aproveitamento de Vagas Novas
+                    (<code>QT_ING / QT_VG_NOVA</code>).
+                </li>
+                <li>
+                    <strong>Taxa de Conclusão:</strong> razão entre concluintes e matrículas ativas
+                    (<code>QT_CONC / QT_MAT</code>) para avaliação comparativa entre categorias
+                    administrativas via testes não paramétricos (Mann-Whitney <em>U</em>, correlação
+                    ponto-bisserial e Kruskal-Wallis <em>H</em>).
+                </li>
+            </ul>
+
+            <h3>2.4 Trecho do pipeline de consolidação e tratamento</h3>
+
+            <pre><code>def construir_base_analitica(arquivos_raw: dict, destino_parquet: Path) -> pd.DataFrame:
+    partes = []
+    for ano, caminho in sorted(arquivos_raw.items()):
+        df_ano = pd.read_parquet(caminho, columns=COLUNAS_SELECIONADAS, engine="pyarrow")
+
+        # 1. Filtrar exclusivamente cursos de graduação (TP_NIVEL_ACADEMICO == '1')
+        df_ano = df_ano[df_ano["TP_NIVEL_ACADEMICO"].astype(str) == "1"].copy()
+
+        # 2. Conversão explícita de tipos primitivos
+        for col in COLUNAS_NUMERICAS:
+            df_ano[col] = pd.to_numeric(df_ano[col], errors="coerce").fillna(0).astype("int64")
+        df_ano["NU_ANO_CENSO"] = df_ano["NU_ANO_CENSO"].astype("int32")
+        df_ano["CO_CURSO"] = df_ano["CO_CURSO"].astype("int64")
+
+        # 3. Decodificação de domínios e tratamento transparente de EaD sem região
+        df_ano["REDE"] = df_ano["TP_REDE"].astype(str).map(MAPA_REDE).fillna("Não classificada")
+        df_ano["CATEGORIA_ADM"] = (
+            df_ano["TP_CATEGORIA_ADMINISTRATIVA"].astype(str).map(MAPA_CATEGORIA_ADM).fillna("Outra")
+        )
+        df_ano["MODALIDADE"] = (
+            df_ano["TP_MODALIDADE_ENSINO"].astype(str).map(MAPA_MODALIDADE).fillna("Não informada")
+        )
+        df_ano["REGIAO"] = (
+            df_ano["NO_REGIAO"].astype("string").fillna("Não informada / Exterior (EaD)").astype(str)
+        )
+        partes.append(df_ano)
+
+    df_consolidado = pd.concat(partes, ignore_index=True)
+    df_consolidado.to_parquet(destino_parquet, index=False, engine="pyarrow")
+    return df_consolidado</code></pre>
+        </section>
+
+        <!-- 5. RESULTADOS E DISCUSSÃO -->
+        <section>
+            <h2>3. Resultados e Discussão</h2>
+
+            <h3>3.1 RQ1 — Evolução Proporcional de Vagas Ofertadas e Ingressantes</h3>
+
+            <p>
+                A primeira pergunta de pesquisa investigou a diferença proporcional na evolução da
+                oferta de vagas e do número de ingressantes entre as redes pública e privada entre
+                2020 e 2023. Os resultados consolidados demonstram uma assimetria estrutural profunda
+                tanto na escala absoluta quanto no ritmo de expansão das duas redes.
+            </p>
+
+            <p>
+                Na <strong>rede privada</strong>, o total de vagas ofertadas passou de
+                <strong>18.762.921</strong> em 2020 para <strong>23.681.606</strong> em 2023, o que
+                representa um crescimento acumulado de <strong>+26,21%</strong> e uma taxa de crescimento
+                anual composta (CAGR) de <strong>8,07% ao ano</strong>. No mesmo intervalo, o número
+                de ingressantes saltou de <strong>3.238.469</strong> para <strong>4.424.903</strong>,
+                configurando expansão acumulada de <strong>+36,64%</strong> (CAGR de <strong>10,97%</strong>),
+                com destaque para o salto interanual de +22,55% observado em 2022.
+            </p>
+
+            <p>
+                Em contraste, a <strong>rede pública</strong> apresentou retração em 2021 (-4,22% nas
+                vagas e -6,62% nos ingressantes, reflexo direto do adiamento de vestibulares e calendários
+                acadêmicos durante a pandemia), recuperando-se gradualmente em 2022 e 2023. Ao final do
+                quadriênio, as vagas públicas passaram de <strong>863.520</strong> para
+                <strong>939.929</strong> (<strong>+8,85%</strong> acumulado; CAGR de <strong>2,87%</strong>),
+                enquanto os ingressantes evoluíram de <strong>527.006</strong> para
+                <strong>569.089</strong> (<strong>+7,99%</strong> acumulado; CAGR de <strong>2,59%</strong>).
+            </p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Rede</th>
+                            <th>Vagas Totais</th>
+                            <th>Vagas Novas</th>
+                            <th>Ingressantes</th>
+                            <th>Matrículas</th>
+                            <th>Concluintes</th>
+                            <th>Share Vagas (%)</th>
+                            <th>Share Ing. (%)</th>
+                            <th>Ocupação (%)</th>
+                            <th>Cand./Vaga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2020</td>
+                            <td>Privada</td>
+                            <td>18.762.921</td>
+                            <td>13.659.249</td>
+                            <td>3.238.469</td>
+                            <td>6.724.002</td>
+                            <td>1.074.448</td>
+                            <td>95,60%</td>
+                            <td>86,00%</td>
+                            <td>17,26%</td>
+                            <td>0,75</td>
+                        </tr>
+                        <tr>
+                            <td>2021</td>
+                            <td>Privada</td>
+                            <td>21.850.441</td>
+                            <td>16.237.583</td>
+                            <td>3.452.756</td>
+                            <td>6.907.893</td>
+                            <td>1.107.846</td>
+                            <td>96,35%</td>
+                            <td>87,52%</td>
+                            <td>15,80%</td>
+                            <td>0,49</td>
+                        </tr>
+                        <tr>
+                            <td>2022</td>
+                            <td>Privada</td>
+                            <td>21.959.144</td>
+                            <td>16.558.229</td>
+                            <td>4.231.328</td>
+                            <td>7.367.080</td>
+                            <td>1.048.682</td>
+                            <td>96,19%</td>
+                            <td>88,95%</td>
+                            <td>19,27%</td>
+                            <td>0,58</td>
+                        </tr>
+                        <tr>
+                            <td>2023</td>
+                            <td>Privada</td>
+                            <td>23.681.606</td>
+                            <td>17.610.297</td>
+                            <td>4.424.903</td>
+                            <td>7.907.652</td>
+                            <td>1.117.455</td>
+                            <td>96,18%</td>
+                            <td>88,60%</td>
+                            <td>18,68%</td>
+                            <td>0,43</td>
+                        </tr>
+                        <tr>
+                            <td>2020</td>
+                            <td>Pública</td>
+                            <td>863.520</td>
+                            <td>668.890</td>
+                            <td>527.006</td>
+                            <td>1.956.352</td>
+                            <td>204.174</td>
+                            <td>4,40%</td>
+                            <td>14,00%</td>
+                            <td>61,03%</td>
+                            <td>6,92</td>
+                        </tr>
+                        <tr>
+                            <td>2021</td>
+                            <td>Pública</td>
+                            <td>827.045</td>
+                            <td>646.844</td>
+                            <td>492.141</td>
+                            <td>2.078.661</td>
+                            <td>219.342</td>
+                            <td>3,65%</td>
+                            <td>12,48%</td>
+                            <td>59,51%</td>
+                            <td>5,42</td>
+                        </tr>
+                        <tr>
+                            <td>2022</td>
+                            <td>Pública</td>
+                            <td>870.659</td>
+                            <td>669.239</td>
+                            <td>525.400</td>
+                            <td>2.076.517</td>
+                            <td>238.774</td>
+                            <td>3,81%</td>
+                            <td>11,05%</td>
+                            <td>60,35%</td>
+                            <td>4,82</td>
+                        </tr>
+                        <tr>
+                            <td>2023</td>
+                            <td>Pública</td>
+                            <td>939.929</td>
+                            <td>682.475</td>
+                            <td>569.089</td>
+                            <td>2.069.130</td>
+                            <td>257.214</td>
+                            <td>3,82%</td>
+                            <td>11,40%</td>
+                            <td>60,55%</td>
+                            <td>4,63</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                A diferença na taxa de crescimento acumulado entre as redes foi de
+                <strong>+17,37 pontos percentuais</strong> para as vagas ofertadas e de
+                <strong>+28,65 pontos percentuais</strong> para os ingressantes em favor da rede
+                privada. Como consequência, a participação relativa (<em>market share</em>) do setor
+                privado avançou de 95,60% para <strong>96,18%</strong> das vagas (+0,58 p.p.) e de
+                86,00% para <strong>88,60%</strong> dos ingressantes (+2,60 p.p.), enquanto a rede
+                pública recuou para 3,82% das vagas e 11,40% dos ingressos em 2023.
+            </p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rede</th>
+                            <th>Vagas (2020)</th>
+                            <th>Vagas (2023)</th>
+                            <th>Var. Vagas</th>
+                            <th>CAGR Vagas</th>
+                            <th>&Delta; Share Vagas</th>
+                            <th>Ing. (2020)</th>
+                            <th>Ing. (2023)</th>
+                            <th>Var. Ing.</th>
+                            <th>CAGR Ing.</th>
+                            <th>&Delta; Share Ing.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Privada</strong></td>
+                            <td>18.762.921</td>
+                            <td>23.681.606</td>
+                            <td>+26,21%</td>
+                            <td>8,07%</td>
+                            <td>+0,58 p.p.</td>
+                            <td>3.238.469</td>
+                            <td>4.424.903</td>
+                            <td>+36,64%</td>
+                            <td>10,97%</td>
+                            <td>+2,60 p.p.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pública</strong></td>
+                            <td>863.520</td>
+                            <td>939.929</td>
+                            <td>+8,85%</td>
+                            <td>2,87%</td>
+                            <td>&minus;0,58 p.p.</td>
+                            <td>527.006</td>
+                            <td>569.089</td>
+                            <td>+7,99%</td>
+                            <td>2,59%</td>
+                            <td>&minus;2,60 p.p.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <figure>
+                <div id="grafico-rq1-evolucao" class="plotly-box"></div>
+                <figcaption>
+                    Figura 1 — Evolução temporal de vagas totais, ingressantes e índice base 100
+                    (2020 = 100) por rede de ensino (visualização interativa Plotly).
+                </figcaption>
+            </figure>
+
+            <p class="observacao">
+                <strong>Análise de Ociosidade e Demanda:</strong> Embora a rede privada domine
+                amplamente o volume de vagas ofertadas, sua taxa média de ocupação permaneceu abaixo
+                de 20% em todo o período (17,26% em 2020 e 18,68% em 2023), com relação candidato/vaga
+                declinando de 0,75 para 0,43. Isso reflete uma estratégia comercial de ampla abertura
+                de vagas regulatórias — sobretudo em polos EaD — com elevada capacidade ociosa.
+                Inversamente, as IES públicas mantiveram taxas de ocupação superiores a 59,5% em
+                todos os anos (atingindo <strong>60,55%</strong> das vagas totais e
+                <strong>83,39%</strong> das vagas novas em 2023) e elevada concorrência média de
+                <strong>4,63 candidatos por vaga</strong>.
+            </p>
+
+            <figure>
+                <div id="grafico-rq1-ocupacao" class="plotly-box"></div>
+                <figcaption>
+                    Figura 2 — Comparação da taxa de ocupação (%) e da relação candidato/vaga entre
+                    as redes pública e privada (2020–2023).
+                </figcaption>
+            </figure>
+
+            <h3>3.2 RQ2 — Correlação entre Categoria Administrativa e Taxa de Conclusão</h3>
+
+            <p>
+                A segunda pergunta de pesquisa avaliou a relação estatística entre a natureza
+                administrativa da instituição e o desempenho na conclusão de cursos de graduação.
+                Observando os fluxos agregados da base consolidada, a rede privada registrou
+                1.074.448 concluintes sobre 6.724.002 matrículas em 2020 (razão agregada de
+                <strong>15,98%</strong>), evoluindo para 1.117.455 concluintes sobre 7.907.652
+                matrículas em 2023 (<strong>14,13%</strong>). Na rede pública, os concluintes
+                cresceram continuamente de 204.174 sobre 1.956.352 matrículas em 2020
+                (<strong>10,44%</strong>) para 257.214 sobre 2.069.130 matrículas em 2023
+                (<strong>12,43%</strong>), representando um aumento absoluto de +25,98% no número
+                de diplomados públicos ao longo do quadriênio.
+            </p>
+
+            <p>
+                Como as distribuições das taxas de conclusão por oferta de curso apresentam forte
+                assimetria positiva e presença de valores extremos (cursos recém-criados sem turmas
+                formadas e cursos com evasão elevada), a avaliação inferencial foi conduzida por meio
+                de testes não paramétricos (<strong>Mann-Whitney <em>U</em></strong> para a comparação binária
+                Pública vs. Privada, <strong>correlação ponto-bisserial</strong> e teste de
+                <strong>Kruskal-Wallis <em>H</em></strong> com comparações pareadas ajustadas por Bonferroni
+                entre as categorias administrativas: <em>Pública Federal</em>, <em>Pública Estadual</em>,
+                <em>Pública Municipal</em>, <em>Privada com fins lucrativos</em> e <em>Privada sem fins
+                lucrativos</em>).
+            </p>
+
+            <p>
+                Os resultados estatísticos confirmam diferenças significativas (<em>p</em> &lt; 0,001) entre
+                as categorias administrativas, explicadas por fatores estruturais e pedagógicos
+                distintos:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Perfil de duração e grau acadêmico:</strong> A rede privada possui maior
+                    proporção de cursos superiores de tecnologia (grau tecnológico, com integralização
+                    média de 2 a 3 anos) e licenciaturas/bacharelados na área de Negócios e Educação,
+                    acelerando o giro entre matrícula e diplomação frente à predominância de
+                    bacharelados de 4 a 6 anos (como Engenharias e Ciências da Saúde) nas
+                    universidades federais e estaduais.
+                </li>
+                <li>
+                    <strong>Trajetória de recuperação pós-pandemia:</strong> Enquanto a razão
+                    concluintes/matrículas da rede privada recuou -1,85 p.p. entre 2020 e 2023 —
+                    pressionada pelo influxo massivo de novos ingressantes EaD ainda nos semestres
+                    iniciais e pela retenção financeira —, a rede pública elevou sua razão de
+                    conclusão em +1,99 p.p. à medida que os calendários acadêmicos foram normalizados.
+                </li>
+            </ul>
+
+            <figure>
+                <div id="grafico-rq2-conclusao" class="plotly-box"></div>
+                <figcaption>
+                    Figura 3 — Evolução do volume de concluintes e da razão agregada
+                    Concluintes/Matrículas (%) por rede de ensino (2020–2023).
+                </figcaption>
+            </figure>
+
+            <h3>3.3 RQ3 — Distribuição Regional da Oferta de Vagas por Modalidade (Presencial vs. EaD)</h3>
+
+            <p>
+                A terceira pergunta de pesquisa examinou como a oferta de vagas se distribui
+                geograficamente entre as cinco macrorregiões brasileiras (Norte, Nordeste, Sudeste,
+                Sul e Centro-Oeste) quando cruzadas as dimensões de rede administrativa e modalidade
+                de ensino (<code>Presencial</code> vs. <code>EaD</code>), isolando com transparência
+                o estrato <code>"Não informada / Exterior (EaD)"</code> identificado no tratamento
+                dos dados.
+            </p>
+
+            <p>
+                A estratificação regional evidencia dois modelos distintos de territorialização do
+                ensino superior no Brasil:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Concentração demográfica e assimetria Sudeste–Norte:</strong> A região
+                    <strong>Sudeste</strong> concentra a maior parcela absoluta das vagas presenciais
+                    e a distância do país, seguida pelas regiões <strong>Nordeste</strong> e
+                    <strong>Sul</strong>. Em contrapartida, as regiões <strong>Norte</strong> e
+                    <strong>Centro-Oeste</strong> apresentam menor densidade de instituições físicas,
+                    dependendo fortemente da capilaridade dos polos de educação a distância para a
+                    expansão da oferta.
+                </li>
+                <li>
+                    <strong>Hegemonia da rede privada via EaD:</strong> A expansão de +26,21% nas
+                    vagas privadas observada na RQ1 é substancialmente impulsionada pela modalidade
+                    <strong>EaD</strong>, que permite a grandes grupos educacionais multiplicar
+                    polos de apoio presencial em municípios de pequeno e médio porte com baixo custo
+                    marginal por vaga autorizada.
+                </li>
+                <li>
+                    <strong>Vocação presencial e interiorização pública:</strong> Na rede pública
+                    (Federal e Estadual), a oferta permanece majoritariamente concentrada na
+                    modalidade <strong>presencial</strong>, com forte presença tanto nas capitais
+                    quanto em campi interiorizados resultantes de políticas de expansão universitária
+                    e dos Institutos Federais. A oferta EaD pública possui caráter complementar e
+                    focado, sobretudo por meio do sistema Universidade Aberta do Brasil (UAB) em
+                    cursos de licenciatura e formação docente.
+                </li>
+            </ul>
+
+            <figure>
+                <div id="grafico-rq3-sintese" class="plotly-box"></div>
+                <figcaption>
+                    Figura 4 — Comparativo multidimensional entre as redes Pública e Privada em 2023:
+                    Vagas Totais, Vagas Novas, Inscritos, Ingressantes, Matrículas e Concluintes
+                    (escala logarítmica para visualização simultânea das magnitudes).
+                </figcaption>
+            </figure>
+        </section>
+
+        <!-- 6. CONCLUSÃO -->
+        <section>
+            <h2>4. Conclusão</h2>
+
+            <p>
+                Este estudo realizou uma análise empírica abrangente sobre a evolução do ensino
+                superior brasileiro entre 2020 e 2023 a partir de mais de dois milhões de registros
+                de cursos de graduação dos microdados do Censo da Educação Superior (Inep/MEC). Os
+                achados permitem responder de forma objetiva às três questões norteadoras da pesquisa.
+            </p>
+
+            <p>
+                Em relação à <strong>RQ1</strong>, comprovou-se que a rede privada expandiu sua oferta
+                de vagas (+26,21%) e seu volume de ingressantes (+36,64%) em ritmo expressivamente
+                superior ao da rede pública (+8,85% e +7,99%, respectivamente), consolidando mais de
+                96% das vagas e 88,6% dos ingressos nacionais em 2023, embora opere com elevada
+                capacidade ociosa (taxa de ocupação de 18,68%, contra 60,55% na rede pública).
+                Quanto à <strong>RQ2</strong>, identificaram-se diferenças estatisticamente
+                significativas nas taxas de conclusão entre categorias administrativas, refletindo
+                distinções na composição de graus acadêmicos (maior peso de tecnólogos na rede privada),
+                retenção e recuperação pós-pandêmica dos calendários públicos. Por fim, na
+                <strong>RQ3</strong>, verificou-se que a interiorização da rede privada apoia-se
+                predominantemente na capilaridade da modalidade EaD nas cinco macrorregiões,
+                enquanto a rede pública mantém perfil predominantemente presencial e de alta
+                seletividade.
+            </p>
+
+            <p>
+                <strong>Limitações do estudo:</strong> A análise baseia-se em dados agregados anuais
+                no nível de oferta de curso/local, o que impede o acompanhamento longitudinal
+                individualizado da trajetória de cada estudante (coorte real de ingresso até a
+                diplomação ou evasão). Além disso, cerca de 1,7% a 1,8% dos registros EaD não
+                possuem vinculação regional municipal na base original, exigindo seu isolamento em
+                categoria específica nas análises geográficas.
+            </p>
+
+            <p>
+                <strong>Trabalhos futuros:</strong> Recomenda-se expandir o pipeline para incorporar
+                os microdados longitudinais de alunos e docentes, cruzar os indicadores regionais com
+                variáveis socioeconômicas municipais do IBGE e integrar conceitos de avaliação de
+                qualidade (ENADE e CPC), permitindo investigar se a rápida expansão de vagas EaD na
+                rede privada é acompanhada pela manutenção dos padrões de desempenho acadêmico.
+            </p>
+        </section>
+
+        <!-- 7. DISPONIBILIDADE DOS DADOS E DECLARAÇÃO FAIR -->
+        <section>
+            <h2>5. Disponibilidade dos Dados e Declaração FAIR</h2>
+
+            <p>
+                Os microdados primários utilizados nesta investigação são de acesso público e
+                gratuito, mantidos pelo <strong>Instituto Nacional de Estudos e Pesquisas Educacionais
+                Anísio Teixeira (Inep/MEC)</strong>. Todo o fluxo de engenharia de dados, análise
+                estatística e geração deste artigo foi estruturado em conformidade com os princípios
+                <strong>FAIR</strong> (<em>Findable, Accessible, Interoperable e Reusable</em>):
+            </p>
+
+            <div class="fair-grid">
+                <div class="fair-card">
+                    <h3>5.1 Findable (Localizável)</h3>
+                    <p>
+                        O repositório possui estrutura padronizada de diretórios
+                        (<code>data/raw/</code>, <code>data/processed/</code>,
+                        <code>notebooks/</code>), metadados descritivos no <code>README.md</code>,
+                        identificação de autoria e palavras-chave indexáveis.
+                    </p>
+                </div>
+
+                <div class="fair-card">
+                    <h3>5.2 Accessible (Acessível)</h3>
+                    <p>
+                        O código-fonte integral dos notebooks analíticos e este artigo científico
+                        estão disponíveis publicamente via GitHub e GitHub Pages sob protocolos
+                        abertos HTTPS, sem barreiras proprietárias.
+                    </p>
+                </div>
+
+                <div class="fair-card">
+                    <h3>5.3 Interoperable (Interoperável)</h3>
+                    <p>
+                        A base analítica consolidada é persistida no formato aberto colunar
+                        <strong>Apache Parquet</strong>
+                        (<code>censo_superior_2020_2023_graduacao.parquet</code>), com esquema
+                        tipado e vocabulário alinhado ao dicionário oficial do Inep.
+                    </p>
+                </div>
+
+                <div class="fair-card">
+                    <h3>5.4 Reusable (Reutilizável)</h3>
+                    <p>
+                        O pipeline documenta explicitamente todas as regras de filtragem, imputação
+                        e decodificação, acompanhado de <code>requirements.txt</code> e licença aberta
+                        para auditoria e extensão por terceiros.
+                    </p>
+                </div>
+            </div>
+
+            <h3>5.5 Comandos para clonagem e reprodução integral do pipeline</h3>
+
+            <p>
+                Para reproduzir o ambiente computacional, consolidar a base analítica e executar
+                todas as etapas estatísticas do notebook, utilize os comandos abaixo em terminal:
+            </p>
+
+            <pre><code># 1. Clonar o repositório do projeto
+git clone https://github.com/usuario/censo-superior-publica-privada.git
+cd censo-superior-publica-privada
+
+# 2. Criar e ativar o ambiente virtual Python
+python -m venv .venv
+source .venv/bin/activate        # Linux / macOS
+# .venv\Scripts ctivate         # Windows (PowerShell / CMD)
+
+# 3. Instalar as dependências declaradas
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 4. Posicionar os microdados brutos em data/raw/ e executar os notebooks
+jupyter nbconvert --to notebook --execute notebooks/01_diagnostico_exploratorio.ipynb --inplace
+jupyter nbconvert --to notebook --execute notebooks/02_preparacao_analise_resultados.ipynb --inplace</code></pre>
+        </section>
+
+        <!-- 8. REFERÊNCIAS -->
+        <section class="referencias">
+            <h2>6. Referências</h2>
+
+            <p>
+                BRASIL. Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep).
+                <strong>Microdados do Censo da Educação Superior (2020, 2021, 2022 e 2023).</strong>
+                Brasília, DF: Inep/MEC, 2024. Disponível em:
+                https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior.
+                Acesso em: 10 nov. 2026.
+            </p>
+
+            <p>
+                HUNTER, John D. Matplotlib: A 2D Graphics Environment.
+                <strong>Computing in Science &amp; Engineering</strong>,
+                v. 9, n. 3, p. 90–95, 2007. DOI: 10.1109/MCSE.2007.55.
+            </p>
+
+            <p>
+                MCKINNEY, Wes. <strong>Python for Data Analysis: Data Wrangling with pandas, NumPy,
+                and Jupyter.</strong> 3. ed. Sebastopol: O'Reilly Media, 2022.
+            </p>
+
+            <p>
+                PLOTLY TECHNOLOGIES INC. <strong>Collaborative Data Science and Interactive Graphing
+                Library (Plotly.js).</strong> Montréal: Plotly, 2024. Disponível em:
+                https://plotly.com/javascript/. Acesso em: 10 nov. 2026.
+            </p>
+
+            <p>
+                THE PANDAS DEVELOPMENT TEAM. <strong>pandas-dev/pandas: Pandas Documentation.</strong>
+                Zenodo, 2024. Disponível em: https://pandas.pydata.org/. Acesso em: 10 nov. 2026.
+            </p>
+
+            <p>
+                VIRTANEN, Pauli et al. SciPy 1.0: Fundamental Algorithms for Scientific Computing in
+                Python. <strong>Nature Methods</strong>, v. 17, p. 261–272, 2020.
+                DOI: 10.1038/s41592-019-0686-2.
+            </p>
+
+            <p>
+                WILKINSON, Mark D. et al. The FAIR Guiding Principles for scientific data management
+                and stewardship. <strong>Scientific Data</strong>, v. 3, n. 160018, 2016.
+                DOI: 10.1038/sdata.2016.18.
+            </p>
+        </section>
+
+        <footer>
+            Projeto acadêmico — Disciplina: Linguagens de Programação (LP6)<br>
+            Bacharelado em Sistemas de Informação — Unilasalle-RJ
+        </footer>
+
+    </main>
+
+    <!-- SCRIPTS DE VISUALIZAÇÃO INTERATIVA (PLOTLY) -->
+    <script>
+        const anos = [2020, 2021, 2022, 2023];
+
+        // Dados exatos extraídos da tabela rq1_anual do notebook
+        const vagasPrivada = [18762921, 21850441, 21959144, 23681606];
+        const vagasPublica = [863520, 827045, 870659, 939929];
+
+        const ingPrivada = [3238469, 3452756, 4231328, 4424903];
+        const ingPublica = [527006, 492141, 525400, 569089];
+
+        const indiceVagasPriv = [100.00, 116.46, 117.03, 126.21];
+        const indiceVagasPub = [100.00, 95.78, 100.83, 108.85];
+        const indiceIngPriv = [100.00, 106.62, 130.66, 136.64];
+        const indiceIngPub = [100.00, 93.38, 99.70, 107.99];
+
+        const ocupacaoPriv = [17.26, 15.80, 19.27, 18.68];
+        const ocupacaoPub = [61.03, 59.51, 60.35, 60.55];
+        const candVagaPriv = [0.75, 0.49, 0.58, 0.43];
+        const candVagaPub = [6.92, 5.42, 4.82, 4.63];
+
+        const concPriv = [1074448, 1107846, 1048682, 1117455];
+        const concPub = [204174, 219342, 238774, 257214];
+        const taxaConcMatPriv = [15.98, 16.04, 14.23, 14.13];
+        const taxaConcMatPub = [10.44, 10.55, 11.50, 12.43];
+
+        const configPlotly = {
+            responsive: true,
+            displaylogo: false
+        };
+
+        // Figura 1: Índice Base 100 (Vagas e Ingressantes)
+        Plotly.newPlot('grafico-rq1-evolucao', [
+            {
+                x: anos,
+                y: indiceIngPriv,
+                name: 'Ingressantes — Privada (Base 100)',
+                mode: 'lines+markers+text',
+                text: indiceIngPriv.map(v => v.toFixed(1)),
+                textposition: 'top center',
+                line: { color: '#2563eb', width: 3 },
+                marker: { size: 8 }
+            },
+            {
+                x: anos,
+                y: indiceVagasPriv,
+                name: 'Vagas Totais — Privada (Base 100)',
+                mode: 'lines+markers+text',
+                text: indiceVagasPriv.map(v => v.toFixed(1)),
+                textposition: 'bottom center',
+                line: { color: '#60a5fa', width: 2.5, dash: 'dash' },
+                marker: { size: 8 }
+            },
+            {
+                x: anos,
+                y: indiceVagasPub,
+                name: 'Vagas Totais — Pública (Base 100)',
+                mode: 'lines+markers+text',
+                text: indiceVagasPub.map(v => v.toFixed(1)),
+                textposition: 'top center',
+                line: { color: '#059669', width: 2.5, dash: 'dash' },
+                marker: { size: 8 }
+            },
+            {
+                x: anos,
+                y: indiceIngPub,
+                name: 'Ingressantes — Pública (Base 100)',
+                mode: 'lines+markers+text',
+                text: indiceIngPub.map(v => v.toFixed(1)),
+                textposition: 'bottom center',
+                line: { color: '#047857', width: 3 },
+                marker: { size: 8 }
+            }
+        ], {
+            title: 'Evolução Relativa de Vagas e Ingressantes (Índice 2020 = 100)',
+            xaxis: { title: 'Ano do Censo', dtick: 1 },
+            yaxis: { title: 'Índice (2020 = 100)', range: [85, 146] },
+            legend: { orientation: 'h', y: -0.22 },
+            margin: { t: 55, b: 95, l: 60, r: 30 },
+            hovermode: 'x unified'
+        }, configPlotly);
+
+        // Figura 2: Taxa de Ocupação e Candidato/Vaga
+        Plotly.newPlot('grafico-rq1-ocupacao', [
+            {
+                x: anos,
+                y: ocupacaoPub,
+                name: 'Taxa de Ocupação — Pública (%)',
+                type: 'bar',
+                marker: { color: '#059669' },
+                text: ocupacaoPub.map(v => v.toFixed(2) + '%'),
+                textposition: 'auto',
+                yaxis: 'y'
+            },
+            {
+                x: anos,
+                y: ocupacaoPriv,
+                name: 'Taxa de Ocupação — Privada (%)',
+                type: 'bar',
+                marker: { color: '#2563eb' },
+                text: ocupacaoPriv.map(v => v.toFixed(2) + '%'),
+                textposition: 'auto',
+                yaxis: 'y'
+            },
+            {
+                x: anos,
+                y: candVagaPub,
+                name: 'Candidato/Vaga — Pública',
+                mode: 'lines+markers',
+                line: { color: '#d97706', width: 3 },
+                marker: { size: 8 },
+                yaxis: 'y2'
+            },
+            {
+                x: anos,
+                y: candVagaPriv,
+                name: 'Candidato/Vaga — Privada',
+                mode: 'lines+markers',
+                line: { color: '#7c3aed', width: 3, dash: 'dot' },
+                marker: { size: 8 },
+                yaxis: 'y2'
+            }
+        ], {
+            title: 'Taxa de Ocupação das Vagas (%) e Relação Candidato/Vaga (2020–2023)',
+            barmode: 'group',
+            xaxis: { title: 'Ano do Censo', dtick: 1 },
+            yaxis: { title: 'Taxa de Ocupação (%)', range: [0, 75] },
+            yaxis2: {
+                title: 'Relação Candidato / Vaga',
+                overlaying: 'y',
+                side: 'right',
+                range: [0, 8.5]
+            },
+            legend: { orientation: 'h', y: -0.22 },
+            margin: { t: 55, b: 95, l: 60, r: 60 },
+            hovermode: 'x unified'
+        }, configPlotly);
+
+        // Figura 3: Concluintes e Razão Concluintes/Matrículas
+        Plotly.newPlot('grafico-rq2-conclusao', [
+            {
+                x: anos,
+                y: concPriv,
+                name: 'Concluintes — Privada',
+                type: 'bar',
+                marker: { color: '#93c5fd' },
+                yaxis: 'y'
+            },
+            {
+                x: anos,
+                y: concPub,
+                name: 'Concluintes — Pública',
+                type: 'bar',
+                marker: { color: '#6ee7b7' },
+                yaxis: 'y'
+            },
+            {
+                x: anos,
+                y: taxaConcMatPriv,
+                name: 'Concluintes / Matrículas — Privada (%)',
+                mode: 'lines+markers',
+                line: { color: '#1d4ed8', width: 3 },
+                marker: { size: 8 },
+                yaxis: 'y2'
+            },
+            {
+                x: anos,
+                y: taxaConcMatPub,
+                name: 'Concluintes / Matrículas — Pública (%)',
+                mode: 'lines+markers',
+                line: { color: '#047857', width: 3 },
+                marker: { size: 8 },
+                yaxis: 'y2'
+            }
+        ], {
+            title: 'Volume de Concluintes e Razão Concluintes / Matrículas (%) (2020–2023)',
+            barmode: 'group',
+            xaxis: { title: 'Ano do Censo', dtick: 1 },
+            yaxis: { title: 'Número de Concluintes', range: [0, 1300000] },
+            yaxis2: {
+                title: 'Concluintes / Matrículas (%)',
+                overlaying: 'y',
+                side: 'right',
+                range: [8, 18]
+            },
+            legend: { orientation: 'h', y: -0.22 },
+            margin: { t: 55, b: 95, l: 70, r: 60 },
+            hovermode: 'x unified'
+        }, configPlotly);
+
+        // Figura 4: Síntese das Magnitudes em 2023 (Escala Logarítmica)
+        const metricas2023 = [
+            'Vagas Totais',
+            'Vagas Novas',
+            'Inscritos Totais',
+            'Ingressantes',
+            'Matrículas',
+            'Concluintes'
+        ];
+        const valoresPriv2023 = [23681606, 17610297, 10163072, 4424903, 7907652, 1117455];
+        const valoresPub2023 = [939929, 682475, 4350629, 569089, 2069130, 257214];
+
+        Plotly.newPlot('grafico-rq3-sintese', [
+            {
+                x: metricas2023,
+                y: valoresPriv2023,
+                name: 'Rede Privada (2023)',
+                type: 'bar',
+                marker: { color: '#2563eb' }
+            },
+            {
+                x: metricas2023,
+                y: valoresPub2023,
+                name: 'Rede Pública (2023)',
+                type: 'bar',
+                marker: { color: '#059669' }
+            }
+        ], {
+            title: 'Comparativo Geral das Dimensões do Censo da Educação Superior em 2023 (Escala Log)',
+            barmode: 'group',
+            xaxis: { title: 'Indicador Educacional' },
+            yaxis: {
+                title: 'Quantidade (Escala Logarítmica)',
+                type: 'log',
+                autorange: true
+            },
+            legend: { orientation: 'h', y: -0.2 },
+            margin: { t: 55, b: 85, l: 70, r: 30 },
+            hovermode: 'x unified'
+        }, configPlotly);
+    </script>
 
 </body>
 </html>
-
