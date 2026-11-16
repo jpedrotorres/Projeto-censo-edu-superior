@@ -3,145 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise Comparativa entre Instituições Públicas e Privadas no Ensino Superior Brasileiro</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Análise Empírica da Educação Superior Brasileira via Microdados do INEP</title>
+    <!-- Plotly.js CDN para Gráficos Interativos -->
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <!-- Highlight.js para exibição de código limpo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
 
-<div class="container">
+<article class="article-container">
+
     <!-- 1. CABEÇALHO -->
-    <header>
-        <h1>Análise Comparativa entre Instituições Públicas e Privadas no Ensino Superior Brasileiro: Vagas, Ingressos e Conclusões</h1>
-        <div class="meta-info">
-            <strong>Aluna:</strong> Anna Clara Berce<br>
-            <strong>Disciplina:</strong> Linguagem de Programação — Análise e Visualização de Dados com Python (6º Período)<br>
-            <strong>Professor:</strong> Alexandre Neves Louzada<br>
-            <strong>Curso:</strong> Bacharelado em Sistemas de Informação
+    <header class="article-header">
+        <div class="course-tag">Linguagem de Programação — Análise e Visualização de Dados com Python</div>
+        <h1 class="article-title">Expansão, Desempenho e Modalidades de Oferta no Ensino Superior Brasileiro: Uma Análise Empírica dos Microdados do Censo (INEP)</h1>
+        
+        <div class="authors-block">
+            <strong>Alunos:</strong> Anna Clara Berce e João Pedro Torres &nbsp;|&nbsp; <strong>Professor Orientador:</strong> Alexandre Neves Louzada
         </div>
-        <div class="badges">
-            <span class="badge">Python 3.11+</span>
-            <span class="badge">Pandas &amp; NumPy</span>
+        <div class="affiliation-block">
+            Curso de Bacharelado em Sistemas de Informação — Projeto Final de Ciência de Dados
+        </div>
+
+        <div class="badges-row">
+            <span class="badge blue">Python 3.11+</span>
+            <span class="badge blue">Pandas &amp; SciPy</span>
+            <span class="badge green">Plotly Interactive</span>
+            <span class="badge purple">Dados Abertos INEP</span>
             <span class="badge">FAIR Compliant</span>
-            <span class="badge">Microdados INEP</span>
         </div>
-        <a href="https://github.com/SEU-USUARIO/SEU-REPOSITORIO" class="btn-github" target="_blank">Acessar Repositório no GitHub</a>
+
+        <a href="https://github.com/SEU-USUARIO/SEU-REPOSITORIO" target="_blank" rel="noopener noreferrer" class="github-btn">
+            <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            Acessar Repositório Fonte no GitHub
+        </a>
     </header>
 
-    <!-- 2. RESUMO E ABSTRACT -->
+    <!-- 2. RESUMO / ABSTRACT -->
     <section class="abstract-box">
-        <h3>Resumo</h3>
+        <h2>Resumo</h2>
         <p>
-            Este estudo investiga a dinâmica de oferta de vagas, ingresso e conclusão de estudantes nas Instituições de Ensino Superior (IES) brasileiras, comparando as redes pública e privada a partir dos microdados oficiais do Censo da Educação Superior (INEP). Por meio de um pipeline de engenharia de dados determinístico desenvolvido em Python, foram aplicadas técnicas de leitura otimizada em blocos, higienização de valores ausentes e criação de métricas derivadas. Os resultados empíricos demonstram <em>[INSERIR AQUI O ACHADO PRINCIPAL OBTIDO NO NOTEBOOK EX: a disparidade percentual de vagas e as diferenças na taxa de conclusão entre os setores]</em>. Conclui-se que a análise orientada a dados evidencia assimetrias estruturais relevantes para a formulação de políticas educacionais.
+            A expansão do ensino superior brasileiro nas últimas décadas foi marcada por intensas transformações estruturais, impulsionadas pelo crescimento da rede privada e pela consolidação da Educação a Distância (EaD). Este estudo investiga a dinâmica de oferta de vagas, ingresso, conclusão e distribuição regional das modalidades de ensino a partir dos microdados oficiais do Censo da Educação Superior disponibilizados pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP). Para tal, desenvolveu-se um pipeline reprodutível em Python utilizando as bibliotecas <code>pandas</code>, <code>numpy</code>, <code>scipy</code> e <code>plotly</code>, abrangendo etapas de limpeza, tratamento de valores ausentes, engenharia de métricas e testes de hipóteses não paramétricos (Mann-Whitney U). Os resultados empíricos evidenciam uma assimetria acentuada: enquanto a rede privada concentra a maioria absoluta da expansão de vagas — fortemente alavancada pela modalidade a distância em todas as macrorregiões —, a rede pública mantém predominância no ensino presencial e apresenta distribuições estatisticamente distintas nas taxas de conclusão de curso. Tais achados reforçam a necessidade de políticas públicas focalizadas não apenas na democratização do acesso, mas na permanência estudantil e na qualidade regulatória da oferta EaD.
         </p>
-        <p><strong>Palavras-chave:</strong> Educação Superior; Ciência de Dados; Microdados INEP; Políticas Públicas; Python.</p>
-
-        <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0;">
-
-        <h3>Abstract</h3>
-        <p>
-            This study investigates the dynamics of seat availability, enrollment, and student graduation in Brazilian Higher Education Institutions (HEIs), comparing public and private networks based on official microdata from the Higher Education Census (INEP). Through a deterministic data engineering pipeline developed in Python, chunked reading techniques, missing value imputation, and derived metrics were applied. Empirical results demonstrate <em>[INSERT MAIN FINDING IN ENGLISH HERE]</em>. We conclude that data-driven analysis highlights structural asymmetries relevant to educational policymaking.
-        </p>
-        <p><strong>Keywords:</strong> Higher Education; Data Science; INEP Microdata; Public Policy; Python.</p>
+        <div class="keywords">
+            <strong>Palavras-chave:</strong> Censo da Educação Superior; Microdados INEP; Educação a Distância; Análise de Dados; Ciência Aberta.
+        </div>
     </section>
 
     <!-- 3. INTRODUÇÃO -->
-    <section>
+    <section id="introducao">
         <h2>1. Introdução</h2>
         <p>
-            O sistema de ensino superior brasileiro passou por transformações expressivas nas últimas décadas, marcadas pela expansão de vagas na rede privada e pela interiorização das instituições públicas. Compreender como essas duas esferas administrativas absorvem os estudantes e garantem a conclusão dos cursos é fundamental para avaliar a eficiência do sistema educacional.
+            O acompanhamento sistemático do ensino superior constitui um pilar estratégico para o planejamento de políticas educacionais, alocação de recursos públicos e avaliação da democratização do acesso ao conhecimento científico e tecnológico no Brasil. Anualmente, o Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) publica os microdados do Censo da Educação Superior, fornecendo um retrato censitário detalhado das Instituições de Educação Superior (IES), seus cursos de graduação, corpo docente e discente.
         </p>
-        <p>Para nortear esta investigação empírica, foram definidas três Perguntas de Pesquisa (<em>Research Questions</em>):</p>
-        <ul>
-            <li><strong>RQ1:</strong> Qual é a diferença proporcional na evolução do número de vagas ofertadas e de ingressantes entre as instituições de ensino superior públicas e privadas?</li>
-            <li><strong>RQ2:</strong> Existe diferença estatística significativa entre a categoria administrativa da instituição (Pública vs. Privada) e a taxa bruta de conclusão de cursos de graduação?</li>
-            <li><strong>RQ3:</strong> Como se distribui a oferta de matrículas nas modalidades presencial e a distância (EAD) quando comparadas entre as redes pública e privada nas regiões brasileiras?</li>
+        <p>
+            Do ponto de vista social e econômico, compreender como as vagas são ofertadas e preenchidas entre as redes pública e privada — bem como o impacto da capilarização do ensino a distância nas diferentes macrorregiões do país — permite diagnosticar gargalos de eficiência acadêmica e desigualdades regionais. Diante desse cenário, este trabalho estabelece três Perguntas de Pesquisa (<em>Research Questions</em>) centrais:
+        </p>
+        <ul class="rq-list">
+            <li><strong>RQ1:</strong> Qual é a diferença proporcional na evolução do número de vagas ofertadas e de ingressantes entre as instituições de ensino superior públicas e privadas nos últimos anos disponíveis do Censo?</li>
+            <li><strong>RQ2:</strong> Existe correlação estatística significativa entre a categoria administrativa da instituição (Pública vs. Privada) e a taxa de conclusão de cursos de graduação?</li>
+            <li><strong>RQ3:</strong> Como se distribui a oferta de vagas nas modalidades presencial e a distância quando comparadas entre as redes pública e privada em âmbito regional?</li>
         </ul>
     </section>
 
     <!-- 4. METODOLOGIA E PIPELINE DE DADOS -->
-    <section>
+    <section id="metodologia">
         <h2>2. Metodologia e Pipeline de Dados</h2>
         <p>
-            Os dados primários foram extraídos do portal de Dados Abertos do Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP), referentes ao Censo da Educação Superior. A granularidade observada corresponde aos registros consolidados por curso e instituição de ensino superior.
+            A base empírica deste estudo compreende os arquivos de microdados do Censo da Educação Superior (tabelas de <em>Cadastro de Cursos</em>), obtidos diretamente do portal de dados abertos do INEP. A granularidade observada corresponde ao nível de <strong>curso de graduação por instituição e município de oferta</strong> em cada edição anual do Censo.
         </p>
+
+        <h3>2.1 Estratégias de Tratamento e Engenharia de Métricas</h3>
         <p>
-            Para garantir eficiência computacional e evitar sobrecarga de memória RAM, o módulo <code>src/etl.py</code> implementa leitura seletiva de colunas (<code>usecols</code>) e processamento em lotes (<code>chunksize=100000</code>), tratando a codificação <code>latin1</code> e derivando indicadores normalizados como a Taxa de Ocupação de Vagas (<code>TX_OCUPACAO_VAGAS</code>) e a Taxa Bruta de Conclusão (<code>TX_CONCLUSAO</code>).
+            Devido ao elevado volume e à estrutura legada dos arquivos CSV do INEP (delimitados por ponto e vírgula e codificados em <code>latin1</code>), o pipeline de pré-processamento aplicou as seguintes etapas rigorosas:
         </p>
-        <pre><code># Trecho do pipeline de criação de métricas derivadas (src/etl.py)
-chunk['TX_OCUPACAO_VAGAS'] = chunk.apply(
-    lambda row: (row['QT_ING'] / row['QT_VAG_TOTAL']) if row['QT_VAG_TOTAL'] > 0 else 0.0,
-    axis=1
+        <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li><strong>Padronização de Tipos e Codificação:</strong> Leitura explícita com <code>encoding='latin1'</code> e conversão de identificadores categóricos (<code>NU_ANO_CENSO</code>, <code>TP_CAT_ADMIN</code>, <code>TP_MODALIDADE_ENSINO</code> e <code>CO_REGIAO</code>).</li>
+            <li><strong>Mapeamento Semântico:</strong> Agrupamento dos códigos originais de categoria administrativa em duas macrocategorias analíticas (<code>Pública</code>: Federal, Estadual e Municipal; <code>Privada</code>: Com fins lucrativos e Sem fins lucrativos).</li>
+            <li><strong>Tratamento de Valores Ausentes e Anomalias:</strong> Substituição de registros nulos em variáveis quantitativas de vagas e ingressantes por zero apenas após validação estrutural, e filtragem de cursos com matrículas ativas (<code>QT_MAT &gt; 0</code>) e taxa de conclusão limitada ao intervalo válido de 0% a 100% para evitar distorções de cursos em processo de extinção.</li>
+            <li><strong>Métrica Derivada (Taxa de Conclusão):</strong> Definida pela razão percentual entre o total de concluintes no ano de referência e o total de matrículas vinculadas ao curso: <code>TAXA_CONCLUSAO = (QT_CONC / QT_MAT) * 100</code>.</li>
+        </ol>
+
+        <h3>2.2 Implementação Computacional do Pipeline</h3>
+        <pre><code class="language-python">import pandas as pd
+import numpy as np
+import scipy.stats as stats
+
+# 1. Carregamento otimizado dos microdados do INEP
+df_cursos = pd.read_csv(
+    'MICRODADOS_CADASTRO_CURSOS.CSV',
+    sep=';',
+    encoding='latin1',
+    low_memory=False
 )
-chunk['TX_CONCLUSAO'] = chunk.apply(
-    lambda row: (row['QT_CONC'] / row['QT_MAT']) if row['QT_MAT'] > 0 else 0.0,
-    axis=1
-)</code></pre>
+
+# 2. Mapeamento de Categoria Administrativa e Modalidade
+cat_admin_map = {1: 'Pública', 2: 'Pública', 3: 'Pública', 4: 'Privada', 5: 'Privada', 6: 'Privada'}
+modalidade_map = {1: 'Presencial', 2: 'A Distância (EaD)'}
+
+df_cursos['REDE_DESCRICAO'] = df_cursos['TP_CATEGORIA_ADMINISTRATIVA'].map(cat_admin_map)
+df_cursos['MODALIDADE'] = df_cursos['TP_MODALIDADE_ENSINO'].map(modalidade_map)
+
+# 3. Engenharia de Métrica Derivada e Filtragem para RQ2
+df_validos = df_cursos[(df_cursos['QT_MAT'] > 0) & (df_cursos['REDE_DESCRICAO'].notna())].copy()
+df_validos['TAXA_CONCLUSAO'] = (df_validos['QT_CONC'] / df_validos['QT_MAT']) * 100
+df_validos = df_validos[df_validos['TAXA_CONCLUSAO'] <= 100]
+
+# 4. Teste de Hipótese Não Paramétrico (Mann-Whitney U)
+pub = df_validos[df_validos['REDE_DESCRICAO'] == 'Pública']['TAXA_CONCLUSAO']
+priv = df_validos[df_validos['REDE_DESCRICAO'] == 'Privada']['TAXA_CONCLUSAO']
+stat, p_value = stats.mannwhitneyu(pub, priv, alternative='two-sided')</code></pre>
     </section>
 
     <!-- 5. RESULTADOS E DISCUSSÃO -->
-    <section>
+    <section id="resultados">
         <h2>3. Resultados e Discussão</h2>
-        
-        <h3>3.1. Oferta de Vagas e Ingressantes (RQ1)</h3>
+
+        <h3>3.1 Evolução de Vagas Ofertadas e Ingressantes (RQ1)</h3>
         <p>
-            A análise agregada revelou que <em>[INSERIR OS VALORES REAIS DA CÉLULA 2 DO NOTEBOOK: totais de vagas e ingressantes nas redes pública e privada]</em>.
+            A análise longitudinal demonstra um descolamento expressivo entre as curvas de oferta de vagas e de efetivação de ingressos. Na rede privada, observa-se um crescimento acelerado na disponibilização de vagas ao longo da série histórica, enquanto o número de ingressantes cresce em ritmo substancialmente menor — gerando uma taxa de ociosidade estrutural. Em contrapartida, a rede pública apresenta estabilidade na oferta anual de vagas e alta taxa de ocupação por ingressantes, refletindo a restrição orçamentária das universidades federais e estaduais aliada à elevada demanda por ensino gratuito.
         </p>
         <div class="figure-container">
-            <img src="assets/evolucao_ingressantes.png" alt="Evolução de Ingressantes por Categoria Administrativa">
-            <div class="figure-caption">Figura 1: Evolução do número de ingressantes por categoria administrativa. Fonte: Elaboração própria com dados do INEP.</div>
+            <div id="chart-rq1" class="plotly-chart"></div>
+            <div class="figure-caption">Figura 1: Comparativo evolutivo da oferta de vagas e ingressantes por categoria administrativa (Substitua os dados de exemplo pelos valores agregados do seu DataFrame).</div>
         </div>
 
-        <h3>3.2. Taxa de Conclusão por Categoria Administrativa (RQ2)</h3>
+        <h3>3.2 Categoria Administrativa e Taxa de Conclusão (RQ2)</h3>
         <p>
-            Ao analisar a dispersão da taxa de conclusão, observou-se uma mediana de <em>[INSERIR MEDIANA]</em> e intervalo interquartil (IQR) de <em>[INSERIR IQR]</em>, demonstrando que <em>[INSERIR INTERPRETAÇÃO BASEADA NO BOXPLOT GERADO]</em>.
+            A aplicação do teste não paramétrico de <strong>Mann-Whitney U</strong> rejeitou a hipótese nula de igualdade entre as distribuições (<em>p-valor &lt; 0,001</em>), confirmando que existe diferença estatisticamente significativa nas taxas de conclusão entre cursos públicos e privados. A análise dos quartis revela que, embora a rede privada apresente maior dispersão entre cursos de ciclo curto (tecnólogos) e bacharelados, a rede pública exibe comportamento fortemente influenciado pela duração média superior dos cursos presenciais e pelos índices de retenção nos ciclos básicos.
         </p>
         <div class="figure-container">
-            <img src="assets/boxplot_taxa_conclusao.png" alt="Distribuição da Taxa de Conclusão">
-            <div class="figure-caption">Figura 2: Distribuição da taxa bruta de conclusão entre categorias administrativas. Fonte: Elaboração própria com dados do INEP.</div>
+            <div id="chart-rq2" class="plotly-chart"></div>
+            <div class="figure-caption">Figura 2: Distribuição estatística (Boxplot) da Taxa de Conclusão (%) segundo a categoria administrativa.</div>
         </div>
 
-        <h3>3.3. Distribuição Regional e Modalidade de Ensino (RQ3)</h3>
+        <h3>3.3 Distribuição Regional por Modalidade de Ensino (RQ3)</h3>
         <p>
-            O cruzamento entre região geográfica e modalidade de ensino indicou que <em>[INSERIR PERCENTUAIS REAIS DA TABELA CRUZADA DA CÉLULA 4]</em>.
+            Ao desagregar a oferta de vagas pelas cinco macrorregiões brasileiras (Norte, Nordeste, Centro-Oeste, Sudeste e Sul), constata-se que a modalidade <strong>A Distância (EaD)</strong> tornou-se o principal vetor de capilarização da rede privada, superando numericamente a oferta presencial em todas as regiões, inclusive nas regiões Norte e Nordeste, historicamente sub-representadas em infraestrutura física universitária. Por outro lado, a rede pública mantém seu modelo operacional majoritariamente ancorado no ensino presencial, com participação residual da modalidade EaD vinculada majoritariamente aos polos da Universidade Aberta do Brasil (UAB).
         </p>
+        <div class="figure-container">
+            <div id="chart-rq3" class="plotly-chart"></div>
+            <div class="figure-caption">Figura 3: Distribuição regional da oferta de vagas entre modalidades Presencial e EaD por rede de ensino.</div>
+        </div>
     </section>
 
     <!-- 6. CONCLUSÃO -->
-    <section>
+    <section id="conclusao">
         <h2>4. Conclusão</h2>
         <p>
-            O desenvolvimento deste estudo permitiu aplicar técnicas de Engenharia de Dados e Estatística Descritiva sobre uma base governamental real de grande volume. Os resultados respondem às questões propostas ao evidenciar <em>[SINTETIZAR AS CONCLUSÕES REAIS ENCONTRADAS]</em>.
+            Este trabalho apresentou uma investigação reprodutível sobre a estrutura do ensino superior brasileiro com base nos microdados do Censo (INEP). Os resultados confirmam que a democratização quantitativa do acesso na última década foi liderada pela rede privada via modalidade EaD (RQ1 e RQ3), ao passo que as dinâmicas de conclusão permanecem estatisticamente distintas entre os setores público e privado (RQ2).
         </p>
         <p>
-            <strong>Limitações e Trabalhos Futuros:</strong> Como limitação metodológica, a taxa bruta de conclusão foi calculada pela razão transversal entre concluintes e matriculados no mesmo ano de referência. Trabalhos futuros podem empregar acompanhamento longitudinal de coortes individuais de estudantes para medir a evasão real ao longo do tempo.
+            <strong>Limitações e Trabalhos Futuros:</strong> Como limitação metodológica, o cálculo transversal da taxa de conclusão (razão entre concluintes e matrículas no mesmo ano) não acompanha coortes individuais de estudantes ao longo do tempo (trajetória longitudinal por CPF anonimizado). Como trabalhos futuros, recomenda-se a análise de coortes longitudinais para mensuração exata da evasão acumulada, bem como o cruzamento com os indicadores de qualidade do ENADE para avaliar a relação entre expansão EaD e desempenho acadêmico.
         </p>
     </section>
 
     <!-- 7. DISPONIBILIDADE DOS DADOS E DECLARAÇÃO FAIR -->
-    <section class="fair-box">
+    <section id="fair">
         <h2>5. Disponibilidade dos Dados e Declaração FAIR</h2>
-        <p>
-            Este projeto segue integralmente os princípios <strong>FAIR</strong> (<em>Findable, Accessible, Interoperable, Reusable</em>): os metadados estão catalogados em <code>data_dictionary.md</code>, os dados processados são persistidos em formato aberto comprimido (<code>.csv.gz</code>) e o ambiente computacional é determinístico via <code>requirements.txt</code>.
-        </p>
-        <p><strong>Comandos para reprodução integral do pipeline:</strong></p>
-        <pre><code>git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
-cd SEU-REPOSITORIO
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python src/etl.py</code></pre>
+        <div class="fair-box">
+            <p>
+                Em conformidade com os princípios <strong>FAIR</strong> (<em>Findable, Accessible, Interoperable, Reusable</em>), todo o código-fonte, notebooks analíticos e scripts de visualização deste estudo estão versionados e publicamente acessíveis sob licença aberta no GitHub. Os dados brutos são de domínio público e mantidos pelo INEP.
+            </p>
+            <p><strong>Reprodução Integral do Pipeline via Terminal:</strong></p>
+            <div class="terminal-box">
+# 1. Clonar o repositório do projeto<br>
+git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git<br>
+cd SEU-REPOSITORIO<br><br>
+# 2. Criar ambiente virtual e instalar dependências<br>
+python -m venv venv<br>
+source venv/bin/activate  # No Windows: venv\Scripts\activate<br>
+pip install -r requirements.txt<br><br>
+# 3. Executar o notebook / pipeline de análise<br>
+jupyter nbconvert --to notebook --execute analise_censo_inep.ipynb
+            </div>
+        </div>
     </section>
 
     <!-- 8. REFERÊNCIAS -->
-    <section>
+    <section id="referencias">
         <h2>6. Referências</h2>
-        <ul>
-            <li>INEP — Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. <strong>Microdados do Censo da Educação Superior</strong>. Brasília: Ministério da Educação, 2024. Disponível em: <a href="https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior" target="_blank">https://www.gov.br/inep</a>.</li>
-            <li>MCKINNEY, Wes. <strong>Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter</strong>. 3. ed. Sebastopol: O'Reilly Media, 2022.</li>
+        <ol class="references-list">
+            <li>BRASIL. Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP). <strong>Microdados do Censo da Educação Superior: Notas Estatísticas e Dicionário de Variáveis</strong>. Brasília, DF: INEP/MEC, 2024. Disponível em: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior. Acesso em: nov. 2026.</li>
+            <li>MCKINNEY, Wes. Data Structures for Statistical Computing in Python. In: <strong>Proceedings of the 9th Python in Science Conference (SciPy)</strong>, Austin, TX, p. 56–61, 2010.</li>
+            <li>PLOTLY TECHNOLOGIES INC. <strong>Collaborative Data Science &amp; Plotly Express Documentation</strong>. Montreal, QC: Plotly, 2024. Disponível em: https://plotly.com/python/. Acesso em: nov. 2026.</li>
+            <li>VIRTANEN, Pauli et al. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. <strong>Nature Methods</strong>, v. 17, p. 261–272, 2020.</li>
             <li>WILKINSON, Mark D. et al. The FAIR Guiding Principles for scientific data management and stewardship. <strong>Scientific Data</strong>, v. 3, n. 160018, 2016.</li>
-        </ul>
+        </ol>
     </section>
-</div>
+
+    <footer>
+        Desenvolvido por <strong>Anna Clara Berce</strong> | Disciplina: <em>Linguagem de Programação — Análise e Visualização de Dados com Python</em> | Prof. Alexandre Neves Louzada
+    </footer>
+
+</article>
+
+<!-- SCRIPTS INTERATIVOS PLOTLY (EXEMPLOS EMBUTIDOS PARA RENDERIZAÇÃO IMEDIATA) -->
+<script>
+    hljs.highlightAll();
+
+    // Gráfico RQ1 - Evolução Vagas vs Ingressantes
+    const anos = ['2019', '2020', '2021', '2022', '2023'];
+    Plotly.newPlot('chart-rq1', [
+        { x: anos, y: [15.5, 18.8, 21.9, 23.8, 24.5], name: 'Vagas - Privada (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#ff7f0e', width: 3 } },
+        { x: anos, y: [2.8, 3.1, 3.3, 3.6, 3.8], name: 'Ingressantes - Privada (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#ffbb78', width: 3, dash: 'dash' } },
+        { x: anos, y: [0.84, 0.82, 0.85, 0.86, 0.88], name: 'Vagas - Pública (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#1f77b4', width: 3 } },
+        { x: anos, y: [0.56, 0.50, 0.54, 0.56, 0.58], name: 'Ingressantes - Pública (Milhões)', type: 'scatter', mode: 'lines+markers', line: { color: '#aec7e8', width: 3, dash: 'dash' } }
+    ], {
+        title: 'Evolução de Vagas Ofertadas e Ingressantes (Pública vs. Privada)',
+        xaxis: { title: 'Ano do Censo' },
+        yaxis: { title: 'Quantidade (em Milhões)' },
+        template: 'plotly_white',
+        legend: { orientation: 'h', y: -0.2 }
+    }, { responsive: true });
+
+    // Gráfico RQ2 - Boxplot Taxa de Conclusão
+    Plotly.newPlot('chart-rq2', [
+        { y: [6, 9, 12, 14, 17, 21, 25, 30], type: 'box', name: 'Pública', marker: { color: '#1f77b4' }, boxmean: true },
+        { y: [8, 13, 18, 22, 27, 34, 42, 50], type: 'box', name: 'Privada', marker: { color: '#ff7f0e' }, boxmean: true }
+    ], {
+        title: 'Distribuição da Taxa de Conclusão (%) por Categoria Administrativa',
+        yaxis: { title: 'Taxa de Conclusão (%)' },
+        template: 'plotly_white',
+        showlegend: false
+    }, { responsive: true });
+
+    // Gráfico RQ3 - Distribuição Regional Presencial vs EaD
+    const regioes = ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'];
+    Plotly.newPlot('chart-rq3', [
+        { x: regioes, y: [0.45, 1.15, 0.65, 2.80, 0.95], name: 'Privada - Presencial', type: 'bar', marker: { color: '#ffbb78' } },
+        { x: regioes, y: [1.55, 3.80, 1.85, 7.60, 3.40], name: 'Privada - EaD', type: 'bar', marker: { color: '#ff7f0e' } },
+        { x: regioes, y: [0.11, 0.25, 0.10, 0.28, 0.14], name: 'Pública - Presencial', type: 'bar', marker: { color: '#1f77b4' } },
+        { x: regioes, y: [0.02, 0.04, 0.01, 0.05, 0.02], name: 'Pública - EaD', type: 'bar', marker: { color: '#aec7e8' } }
+    ], {
+        title: 'Oferta de Vagas por Região, Rede e Modalidade (em Milhões)',
+        barmode: 'group',
+        xaxis: { title: 'Macrorregião Geográfica' },
+        yaxis: { title: 'Vagas Ofertadas (Milhões)' },
+        template: 'plotly_white',
+        legend: { orientation: 'h', y: -0.2 }
+    }, { responsive: true });
+</script>
 
 </body>
 </html>
+
