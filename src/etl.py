@@ -15,6 +15,15 @@ COLUNAS = [
     "CO_REGIAO",
     "NO_REGIAO"
 ]
+
+COLUNAS_NUMERICAS = [
+    "NU_ANO_CENSO",
+    "QT_VG_TOTAL",
+    "QT_ING",
+    "QT_MAT",
+    "QT_CONC"
+]
+
 def carregar_dados(ano):
     arquivo = Path(f"data/raw/{ano}/MICRODADOS_CADASTRO_CURSOS_{ano}.CSV")
     
@@ -32,6 +41,18 @@ def carregar_dados(ano):
     
     return df
 
+def tratar_tipos_dados(df):
+    for coluna in df.columns:
+        if coluna in COLUNAS_NUMERICAS:
+            df[coluna] = pd.to_numeric(
+                df[coluna],
+                errors="raise"
+            ).astype("Int64")
+        else:
+            df[coluna] = df[coluna].astype("string").str.strip()
+
+    return df
+
 def exportar_dados(df):
     destino = Path("data/processed")
     destino.mkdir(parents=True, exist_ok=True)
@@ -43,13 +64,24 @@ def exportar_dados(df):
         index=False
     )
     
+    df.to_parquet(
+        destino / "censo_superior_consolidado.parquet",
+        engine="pyarrow",
+        compression=None,
+        index=False
+    )
+    
     print("\nArquivo consolidado gerado com sucesso!")
 
 def executar_etl():
     bases = [carregar_dados(ano) for ano in ANOS]
     df_cursos = pd.concat(bases, ignore_index=True)
+    df_cursos = tratar_tipos_dados(df_cursos)
 
-    print(df_cursos.info())
+    print("\nInformações do DataFrame:")
+    df_cursos.info()
+    
+    print("\nQuantidade de registros por ano:")
     print(df_cursos.groupby("NU_ANO_CENSO").size())
     
     exportar_dados(df_cursos)
