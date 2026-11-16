@@ -1,141 +1,267 @@
 :root {
-primary-color: #1a365d;
-secondary-color: #2b6cb0;
-bg-color: #f8fafc;
-text-color: #1e293b;
-border-color: #e2e8f0;
-code-bg: #1e293b;
-code-text: #f8fafc;
+--primary: #1a365d;
+--secondary: #2b6cb0;
+--accent: #3182ce;
+--bg-body: #f8fafc;
+--bg-paper: #ffffff;
+--text-main: #1e293b;
+--text-muted: #475569;
+--border-color: #e2e8f0;
 }
 
-body {
-font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-line-height: 1.7;
-color: var(--text-color);
-background-color: var(--bg-color);
+* {
+box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
 
-.container {
-max-width: 900px;
+body {
+font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+line-height: 1.75;
+color: var(--text-main);
+background-color: var(--bg-body);
+padding: 2rem 1rem;
+}
+
+.article-container {
+max-width: 960px;
 margin: 0 auto;
-background: #ffffff;
-padding: 40px 50px;
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+background: var(--bg-paper);
+padding: 3.5rem 4rem;
+border-radius: 10px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+border: 1px solid var(--border-color);
 }
 
-header {
-border-bottom: 2px solid var(--primary-color);
-padding-bottom: 25px;
-margin-bottom: 30px;
+/* 1. Cabeçalho */
+header.article-header {
+border-bottom: 2px solid var(--primary);
+padding-bottom: 2rem;
+margin-bottom: 2.5rem;
+text-align: center;
 }
 
-h1 {
-color: var(--primary-color);
+.course-tag {
+font-size: 0.85rem;
+text-transform: uppercase;
+letter-spacing: 1px;
+color: var(--secondary);
+font-weight: 700;
+margin-bottom: 0.75rem;
+}
+
+h1.article-title {
 font-size: 2rem;
-line-height: 1.25;
-margin-bottom: 15px;
+color: var(--primary);
+line-height: 1.3;
+margin-bottom: 1.25rem;
+font-weight: 800;
 }
 
-.meta-info {
-font-size: 0.95rem;
-color: #475569;
-margin-bottom: 15px;
+.authors-block {
+font-size: 1.05rem;
+color: var(--text-main);
+margin-bottom: 0.4rem;
 }
 
-.badges {
+.affiliation-block {
+font-size: 0.92rem;
+color: var(--text-muted);
+margin-bottom: 1.25rem;
+}
+
+.badges-row {
 display: flex;
 flex-wrap: wrap;
-gap: 8px;
-margin-bottom: 15px;
+justify-content: center;
+gap: 0.5rem;
+margin-bottom: 1.25rem;
 }
 
 .badge {
-background-color: #e2e8f0;
-color: #1e293b;
-padding: 4px 10px;
-border-radius: 4px;
-font-size: 0.8rem;
+display: inline-block;
+padding: 0.25rem 0.65rem;
+font-size: 0.78rem;
 font-weight: 600;
+border-radius: 4px;
+background-color: #edf2f7;
+color: #2d3748;
+border: 1px solid #cbd5e0;
 }
 
-.btn-github {
-display: inline-block;
-background-color: var(--primary-color);
+.badge.blue { background-color: #ebf8ff; color: #2b6cb0; border-color: #bee3f8; }
+.badge.green { background-color: #f0fff4; color: #276749; border-color: #c6f6d5; }
+.badge.purple { background-color: #faf5ff; color: #553c9a; border-color: #e9d8fd; }
+
+.github-btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+background-color: #24292e;
 color: #ffffff;
 text-decoration: none;
-padding: 8px 16px;
-border-radius: 5px;
+padding: 0.6rem 1.25rem;
+border-radius: 6px;
 font-size: 0.9rem;
 font-weight: 600;
+transition: background-color 0.2s ease;
 }
 
-.btn-github:hover {
-background-color: var(--secondary-color);
+.github-btn:hover {
+background-color: #0366d6;
 }
 
+/* 2. Resumo / Abstract */
 .abstract-box {
 background-color: #f1f5f9;
-border-left: 4px solid var(--secondary-color);
-padding: 20px;
-margin-bottom: 30px;
+border-left: 4px solid var(--secondary);
+padding: 1.5rem 1.75rem;
+margin-bottom: 2.5rem;
 border-radius: 0 6px 6px 0;
 }
 
+.abstract-box h2 {
+font-size: 1.15rem;
+color: var(--primary);
+margin-bottom: 0.6rem;
+border: none;
+padding: 0;
+}
+
+.abstract-box p {
+font-size: 0.95rem;
+text-align: justify;
+margin-bottom: 0.85rem;
+}
+
+.keywords {
+font-size: 0.88rem;
+color: var(--text-muted);
+}
+
+/* Seções Gerais */
+section {
+margin-bottom: 2.5rem;
+}
+
 h2 {
-color: var(--primary-color);
+font-size: 1.45rem;
+color: var(--primary);
 border-bottom: 1px solid var(--border-color);
-padding-bottom: 8px;
-margin-top: 35px;
+padding-bottom: 0.4rem;
+margin-bottom: 1.1rem;
+margin-top: 2rem;
 }
 
 h3 {
-color: var(--secondary-color);
-margin-top: 25px;
+font-size: 1.15rem;
+color: var(--secondary);
+margin-top: 1.4rem;
+margin-bottom: 0.6rem;
 }
 
+p {
+margin-bottom: 1rem;
+text-align: justify;
+}
+
+ul.rq-list {
+background: #f8fafc;
+border: 1px solid var(--border-color);
+border-radius: 6px;
+padding: 1.25rem 1.5rem 1.25rem 2.25rem;
+margin: 1.25rem 0;
+}
+
+ul.rq-list li {
+margin-bottom: 0.75rem;
+}
+
+ul.rq-list li:last-child {
+margin-bottom: 0;
+}
+
+/* Blocos de Código */
 pre {
-background-color: var(--code-bg);
-color: var(--code-text);
-padding: 15px;
+margin: 1.25rem 0;
 border-radius: 6px;
 overflow-x: auto;
-font-size: 0.88rem;
+border: 1px solid var(--border-color);
 }
 
+code {
+font-family: 'Fira Code', 'Consolas', monospace;
+font-size: 0.86rem;
+}
+
+/* Contêineres de Gráficos */
 .figure-container {
-margin: 25px 0;
-text-align: center;
+margin: 1.75rem 0;
+padding: 1.25rem;
 border: 1px solid var(--border-color);
-padding: 15px;
-border-radius: 6px;
+border-radius: 8px;
 background: #ffffff;
 }
 
-.figure-container img {
-max-width: 100%;
-height: auto;
+.plotly-chart {
+width: 100%;
+min-height: 420px;
 }
 
 .figure-caption {
-font-size: 0.85rem;
-color: #64748b;
-margin-top: 10px;
+font-size: 0.88rem;
+color: var(--text-muted);
+text-align: center;
+margin-top: 0.75rem;
+font-style: italic;
 }
 
+/* Bloco FAIR */
 .fair-box {
-background-color: #f8fafc;
-border: 1px solid #cbd5e1;
-padding: 20px;
+background-color: #f0fdf4;
+border: 1px solid #bbf7d0;
+border-left: 4px solid #16a34a;
+padding: 1.5rem;
 border-radius: 6px;
 }
 
-@media (max-width: 600px) {
-.container {
-  padding: 20px;
+.terminal-box {
+background-color: #1e293b;
+color: #f8fafc;
+padding: 1rem 1.25rem;
+border-radius: 6px;
+font-family: 'Fira Code', 'Consolas', monospace;
+font-size: 0.85rem;
+margin-top: 0.85rem;
+overflow-x: auto;
 }
-h1 {
-  font-size: 1.5rem;
+
+/* Referências */
+ol.references-list {
+padding-left: 1.5rem;
+font-size: 0.92rem;
+color: var(--text-muted);
+}
+
+ol.references-list li {
+margin-bottom: 0.75rem;
+text-align: left;
+}
+
+footer {
+margin-top: 3rem;
+padding-top: 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+font-size: 0.85rem;
+color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+.article-container {
+  padding: 2rem 1.25rem;
+}
+h1.article-title {
+  font-size: 1.55rem;
 }
 }
