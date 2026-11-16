@@ -2,7 +2,7 @@
 
 **Autores:**  
 - Anna Clara Berce Cavalcanti de Albuquerque  
-- João Pedro Torres de Faria  
+- João Pedro de Farias Torres de Souza  
 
 **Disciplina:** Linguagem de Programação — Análise e Visualização de Dados com Python (6º Período)  
 **Professor:** Alexandre Neves Louzada  
