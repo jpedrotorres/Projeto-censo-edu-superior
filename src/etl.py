@@ -1,4 +1,5 @@
 import pandas as pd
+import gc
 from pathlib import Path
 
 ANOS = [2020, 2021, 2022, 2023]
@@ -18,6 +19,7 @@ COLUNAS = [
 
 COLUNAS_NUMERICAS = [
     "NU_ANO_CENSO",
+    "CO_CURSO",
     "QT_VG_TOTAL",
     "QT_ING",
     "QT_MAT",
@@ -34,7 +36,6 @@ def carregar_dados(ano):
         arquivo,
         sep=";",
         encoding="latin1",
-        usecols=lambda coluna: coluna in COLUNAS,
         dtype=str,
         low_memory=False
     )
@@ -53,19 +54,12 @@ def tratar_tipos_dados(df):
 
     return df
 
-def exportar_dados(df):
+def exportar_dados(df, ano):
     destino = Path("data/processed")
     destino.mkdir(parents=True, exist_ok=True)
-
-    df.to_csv(
-        destino / "censo_superior_consolidado.csv",
-        sep=";",
-        encoding="utf-8-sig",
-        index=False
-    )
     
     df.to_parquet(
-        destino / "censo_superior_consolidado.parquet",
+        destino / f"censo_superior_{ano}.parquet",
         engine="pyarrow",
         compression=None,
         index=False
@@ -74,19 +68,17 @@ def exportar_dados(df):
     print("\nArquivo consolidado gerado com sucesso!")
 
 def executar_etl():
-    bases = [carregar_dados(ano) for ano in ANOS]
-    df_cursos = pd.concat(bases, ignore_index=True)
-    df_cursos = tratar_tipos_dados(df_cursos)
+    for ano in ANOS:
+        print(f"\nProcessando {ano}...")
 
-    print("\nInformações do DataFrame:")
-    df_cursos.info()
-    
-    print("\nQuantidade de registros por ano:")
-    print(df_cursos.groupby("NU_ANO_CENSO").size())
-    
-    exportar_dados(df_cursos)
-    
-    return df_cursos
+        df_ano = carregar_dados(ano)
+        df_ano = tratar_tipos_dados(df_ano)
+        
+        exportar_dados(df_ano, ano)
+        
+        print(f"{ano}: {len(df_ano):,} registros salvos.")
+        del df_ano
+        gc.collect()
 
 if __name__ == "__main__":
-    df_cursos = executar_etl()
+    executar_etl()
