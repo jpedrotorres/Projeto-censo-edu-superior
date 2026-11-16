@@ -11,8 +11,8 @@
 ## Resumo Executivo
 Este repositório contém o pipeline de engenharia de dados e o artigo científico interativo desenvolvido para investigar a evolução de vagas, ingressantes e taxas de conclusão no Ensino Superior brasileiro a partir dos microdados oficiais do INEP[cite: 1, 3].
 
-- **Fonte Oficial dos Dados:** [Microdados do Censo da Educação Superior — INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior)[cite: 1]
-- **Artigo Publicado (GitHub Pages):** `https://SEU-USUARIO.github.io/SEU-REPOSITORIO/`[cite: 1, 3]
+- **Fonte Oficial dos Dados:** [Microdados do Censo da Educação Superior — INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior)
+- **Artigo Publicado (GitHub Pages):** 
 
 ## Estrutura do Repositório (FAIR-Compliant)
 ```text
